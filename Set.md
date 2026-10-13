@@ -64,6 +64,18 @@ void Set.Clear()
 
 Removes all items from the Set.
 
+Example:
+
+```ags
+Set *colors = Set.Create(eNonSorted, eCaseInsensitive);
+colors.Add("red");
+colors.Add("blue");
+colors.Clear();
+Display("The set has %d items.", colors.ItemCount);
+```
+
+will add two items to the set, remove them all, and display "The set has 0 items.".
+
 ---
 
 ### `Set.Contains`
@@ -123,6 +135,20 @@ bool Set.Remove(String item)
 
 Removes an item from the Set. Returns false if there was no such item, otherwise returns true.
 
+Example:
+
+```ags
+Set *colors = Set.Create(eNonSorted, eCaseInsensitive);
+colors.Add("red");
+colors.Add("blue");
+if (colors.Remove("red"))
+{
+  Display("The item was removed.");
+}
+```
+
+will remove "red" from the set and tell that it was successful.
+
 *See also:* [`Add`](Set#setadd), [`Contains`](Set#setcontains)
 
 ---
@@ -134,6 +160,18 @@ StringCompareStyle Set.CompareStyle
 ```
 
 Returns the string comparison method for this Set.
+
+Example:
+
+```ags
+Set *colors = Set.Create(eNonSorted, eCaseSensitive);
+if (colors.CompareStyle == eCaseSensitive)
+{
+  Display("The items are case-sensitive.");
+}
+```
+
+will create a case-sensitive set and confirm its comparison style.
 
 *See also:* [`SortStyle`](Set#setsortstyle)
 
@@ -147,6 +185,17 @@ int Set.ItemCount
 
 Returns the number of items currently in the Set.
 
+Example:
+
+```ags
+Set *colors = Set.Create(eNonSorted, eCaseInsensitive);
+colors.Add("red");
+colors.Add("blue");
+Display("The set has %d items.", colors.ItemCount);
+```
+
+will display "The set has 2 items.".
+
 ---
 
 ### `Set.SortStyle`
@@ -156,5 +205,17 @@ SortStyle Set.SortStyle
 ```
 
 Returns the sorting method for this Set.
+
+Example:
+
+```ags
+Set *colors = Set.Create(eSorted, eCaseInsensitive);
+if (colors.SortStyle == eSorted)
+{
+  Display("The items are kept sorted.");
+}
+```
+
+will create a sorted set and confirm its sort style.
 
 *See also:* [`CompareStyle`](Set#setcomparestyle)

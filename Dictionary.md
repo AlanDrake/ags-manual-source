@@ -45,6 +45,18 @@ void Dictionary.Clear()
 
 Removes all items from the dictionary.
 
+Example:
+
+```ags
+Dictionary *capitals = Dictionary.Create(eNonSorted, eCaseInsensitive);
+capitals.Set("France", "Paris");
+capitals.Set("Italy", "Rome");
+capitals.Clear();
+Display("The dictionary has %d items.", capitals.ItemCount);
+```
+
+will add two pairs to the dictionary, remove them all, and display "The dictionary has 0 items.".
+
 ---
 
 ### `Dictionary.Contains`
@@ -160,6 +172,20 @@ bool Dictionary.Remove(String key)
 
 Removes a key/value pair from the dictionary, returns true on success and false if there was no such key.
 
+Example:
+
+```ags
+Dictionary *capitals = Dictionary.Create(eNonSorted, eCaseInsensitive);
+capitals.Set("France", "Paris");
+capitals.Set("Italy", "Rome");
+if (capitals.Remove("France"))
+{
+  Display("The pair was removed.");
+}
+```
+
+will remove the key "France" with its value from the dictionary and tell that it was successful.
+
 *See also:* [`Dictionary.Set`](Dictionary#dictionaryset)
 
 ---
@@ -171,6 +197,17 @@ bool Dictionary.Set(String key, String value)
 ```
 
 Assigns a value to the given key. If the key did not exist then it will be created, otherwise the old value for this key will be overwritten with a new one.
+
+Example:
+
+```ags
+Dictionary *capitals = Dictionary.Create(eNonSorted, eCaseInsensitive);
+capitals.Set("France", "Paris");
+capitals.Set("France", "Lyon");
+Display(capitals.Get("France"));
+```
+
+will assign a value to the key "France", then overwrite it with a new one, and display "Lyon".
 
 *See also:* [`Dictionary.Get`](Dictionary#dictionaryget),
 [`Dictionary.Remove`](Dictionary#dictionaryremove)
@@ -185,6 +222,18 @@ StringCompareStyle Dictionary.CompareStyle
 
 Returns the string comparison method for this dictionary, which determines whether its keys are case-sensitive.
 
+Example:
+
+```ags
+Dictionary *capitals = Dictionary.Create(eNonSorted, eCaseSensitive);
+if (capitals.CompareStyle == eCaseSensitive)
+{
+  Display("The keys are case-sensitive.");
+}
+```
+
+will create a dictionary with case-sensitive keys and confirm its comparison style.
+
 *See also:* [`Dictionary.SortStyle`](Dictionary#dictionarysortstyle)
 
 ---
@@ -197,6 +246,17 @@ int Dictionary.ItemCount
 
 Gets the number of key/value pairs currently in the dictionary.
 
+Example:
+
+```ags
+Dictionary *capitals = Dictionary.Create(eNonSorted, eCaseInsensitive);
+capitals.Set("France", "Paris");
+capitals.Set("Italy", "Rome");
+Display("The dictionary has %d items.", capitals.ItemCount);
+```
+
+will display "The dictionary has 2 items.".
+
 ---
 
 ### `Dictionary.SortStyle`
@@ -206,5 +266,17 @@ SortStyle Dictionary.SortStyle
 ```
 
 Returns the key sorting method for this dictionary.
+
+Example:
+
+```ags
+Dictionary *capitals = Dictionary.Create(eSorted, eCaseInsensitive);
+if (capitals.SortStyle == eSorted)
+{
+  Display("The keys are kept sorted.");
+}
+```
+
+will create a dictionary with sorted keys and confirm its sort style.
 
 *See also:* [`Dictionary.CompareStyle`](Dictionary#dictionarycomparestyle)

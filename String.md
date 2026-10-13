@@ -287,6 +287,19 @@ Joins a dynamic array of strings using the separator in a single string
 **NOTE:** This function is static, which means you do not call it on an
 existing string variable, but use `String.Join()` instead. 
 
+Example:
+
+```ags
+String parts[] = new String[3];
+parts[0] = "red";
+parts[1] = "green";
+parts[2] = "blue";
+String result = String.Join(parts, ", ");
+Display(result);
+```
+
+will join the three strings using ", " as a separator, and display "red, green, blue".
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -394,6 +407,18 @@ String[] String.Split(string separator, optional StringSplitOptions options);
 
 Creates a dynamic array made of substrings of the string each time the separator occurred.
 
+Example:
+
+```ags
+String items[] = "red, green,, blue".Split(",", eStrSplit_RemoveEmpty | eStrSplit_Trim);
+for (int i = 0; i < items.Length; i++)
+{
+  Display("Item %d: '%s'", i, items[i]);
+}
+```
+
+will split the string at every comma, drop empty parts and trim the whitespace around the rest, so the result is "red", "green" and "blue".
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 *See also:* [`StringSplitOptions`](StandardEnums#stringsplitoptions)
@@ -466,6 +491,16 @@ String.Trim()
 ```
 
 Returns a new string without any leading or trailing whitespace.
+
+Example:
+
+```ags
+String text = "   Hello!  ";
+String trimmed = text.Trim();
+Display("[%s]", trimmed);
+```
+
+will display "[Hello!]", with the leading and trailing spaces removed.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 

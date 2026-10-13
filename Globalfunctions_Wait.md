@@ -69,6 +69,20 @@ Cancels current Wait function, regardless of its type, if one was active at the 
 
 Optionally lets provide a "result value" that will be returned by the Wait function, or by [Game.BlockingWaitSkipped](Game#gameblockingwaitskipped) property. Because of how Wait's return code is defined, this has to be a positive value not greater than 16777215.
 
+Example:
+
+```ags
+function on_key_press(eKeyCode keycode)
+{
+  if (keycode == eKeyS)
+  {
+    SkipWait(5);
+  }
+}
+```
+
+will cancel the currently running Wait whenever the player presses S; the value 5 will then be reported by the Wait function that was cancelled, and by Game.BlockingWaitSkipped.
+
 *Compatibility:* Supported by **AGS 3.6.0** and later versions. A "resultValue" argument is supported since **AGS 3.6.3**.
 
 *See also:* [`WaitKey`](Globalfunctions_Wait#waitkey),

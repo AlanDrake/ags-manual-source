@@ -389,6 +389,15 @@ static int Maths.Random(int limit)
 
 Returns a random number in the range of 0 to LIMIT-1.
 
+Example:
+
+```ags
+int dice = Maths.Random(6) + 1;
+Display("You rolled %d.", dice);
+```
+
+will simulate a six-sided dice: Maths.Random(6) gives a number from 0 to 5, and adding 1 makes it 1 to 6.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -401,6 +410,17 @@ static float Maths.RandomFloat()
 
 Returns a random float in the range of [0.0, 1.0) (including 0 but excluding 1).
 
+Example:
+
+```ags
+if (Maths.RandomFloat() < 0.25)
+{
+  Display("A lucky 25% chance!");
+}
+```
+
+will print the message in about one case out of four.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -412,6 +432,15 @@ static float Maths.Round(float value, RoundDirection)
 ```
 
 Rounds the given float towards chosen direction, and returns a result as a new float.
+
+Example:
+
+```ags
+float rounded = Maths.Round(2.5, eRoundUp);
+Display("%.1f", rounded);
+```
+
+will round 2.5 up, and display "3.0".
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 

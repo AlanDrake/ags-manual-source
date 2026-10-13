@@ -93,6 +93,15 @@ Writes current engine settings to the player's configuration file, so that they 
 
 This saves only the options that may be changed at runtime, such as translation and fullscreen/windowed graphic mode.
 
+Example:
+
+```ags
+System.Windowed = !System.Windowed;
+System.SaveConfigToFile();
+```
+
+will toggle between fullscreen and windowed modes and save the choice, so that the game starts the same way next time.
+
 *Compatibility:* Supported by **AGS 3.5.1** and later versions.
 
 *See also:* [`File.Open`](File#fileopen)
@@ -220,6 +229,14 @@ This is useful for debugging purposes and quickly understanding performance impa
 **NOTE:** if a command line flag that forces displaying fps is passed,
 this property will always be true, setting it will be ignored.
 
+Example:
+
+```ags
+System.DisplayFPS = true;
+```
+
+will display the current frames per second on the screen.
+
 *Compatibility:* Supported by **AGS 3.6.2** and later versions.
 
 *See also:* [`System.FPS`](System#systemfps),
@@ -237,6 +254,14 @@ Gets the current real frames per second ratio of the game.
 This is useful for debugging purposes and quickly understanding performance impacts of the changes you do to your game.
 
 Note that System.FPS may or not be equal to the [`Game.Speed`](Game#gamespeed) value. While Game.Speed reports a logical game's frame rate, and is useful for measuring timing relative to the rest of the game, System.FPS tells the real frame rate, which demonstrates rather how well your game performs on a current system, and whether it runs slower than requested.
+
+Example:
+
+```ags
+Display("The game is running at %d frames per second.", System.FPS);
+```
+
+will display the actual number of frames per second the game is currently running at.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -364,6 +389,14 @@ In practice, locale defines how locale-aware string comparisons work.
 
 This property exists mainly for diagnostic purposes.
 
+Example:
+
+```ags
+Display("The current locale is '%s'.", System.LocaleName);
+```
+
+will display the name of the locale that the engine uses at the moment.
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 ---
@@ -451,6 +484,14 @@ your game's [General settings](GeneralSettings), players may also change it
 in the setup program. In such case it is suggested that you do not
 unconditionally modify this property in script, but rather provide a
 menu option for toggling it at runtime.
+
+Example:
+
+```ags
+System.RenderAtScreenResolution = true;
+```
+
+will make the engine draw the sprites at the display's resolution, instead of the native game resolution, which makes scaled characters and objects look less pixelated.
 
 *Compatibility:* Supported by **AGS 3.4.1** and later versions.
 

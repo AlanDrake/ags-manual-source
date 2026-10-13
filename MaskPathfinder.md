@@ -43,4 +43,13 @@ MaskPathfinder.SetMask(int mask_sprite)
 
 Assigns a new mask to this MaskPathfinder. This has to be a 8-bit sprite to work correctly. The new mask does not have to be the same size as a previous one.
 
+Example:
+
+```ags
+MaskPathfinder *pathfinder = MaskPathfinder.Create(1000);
+pathfinder.SetMask(1001);
+```
+
+will create a MaskPathfinder from the sprite 1000, and then change its mask to the sprite 1001.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.

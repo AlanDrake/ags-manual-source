@@ -22,6 +22,20 @@ Called when a dialog script line "run-script" is processed. PARAMETER
 is the value of the number following the "run-script" on that line of
 the dialog script.
 
+Example:
+
+```ags
+function dialog_request(int parameter)
+{
+  if (parameter == 1)
+  {
+    player.AddInventory(iKey);
+  }
+}
+```
+
+will give the player the item iKey when a dialog script line "run-script 1" is processed.
+
 ---
 
 ### `game_start`
@@ -37,6 +51,18 @@ characters, and to modify initial visibility of GUIs.
 **Note:** When this function is called it is too early to run
 animations or do anything else which relies on a room being loaded
 
+Example:
+
+```ags
+function game_start()
+{
+  cEgo.AddInventory(iKnife);
+  gInventory.Visible = false;
+}
+```
+
+will give the character cEgo the item iKnife and hide the GUI gInventory when the game starts.
+
 ---
 
 ### `interface_click`
@@ -49,6 +75,20 @@ Called when the player clicks on a button on a GUI which has its
 action set as "Run script". INTERFACE is the number of the GUI which
 they clicked on. BUTTON is the object number of the button within this
 GUI.
+
+Example:
+
+```ags
+function interface_click(int interface, int button)
+{
+  if (interface == gPanel.ID && button == btnQuit.ID)
+  {
+    QuitGame(1);
+  }
+}
+```
+
+will ask the player to confirm quitting when the button 'btnQuit' on the GUI 'gPanel' is clicked.
 
 ---
 
@@ -230,6 +270,20 @@ and then decide whether to pass it on to the global script or not. See
 the [`ClaimEvent`](Globalfunctions_General#claimevent) function for
 more details.
 
+Example:
+
+```ags
+function on_mouse_click(MouseButton button, int mx, int my)
+{
+  if (button == eMouseLeft)
+  {
+    Display("You clicked at %d,%d on the screen.", mx, my);
+  }
+}
+```
+
+will display the position of every left mouse click.
+
 *Compatibility:* The `mx` and `my` arguments are only supported since AGS 3.6.2.
 
 ---
@@ -267,6 +321,20 @@ repeatedly_execute()
 Called every game cycle (normally 40 times per second). Additional
 information is [available here](RepExec).
 
+Example:
+
+```ags
+function repeatedly_execute()
+{
+  if (cEgo.x > 300)
+  {
+    cEgo.ChangeRoom(2);
+  }
+}
+```
+
+will send the character cEgo to the room 2 as soon as it walks past the x coordinate 300.
+
 ---
 
 ### `repeatedly_execute_always`
@@ -280,6 +348,19 @@ cutscene) is in progress. You **cannot** call any blocking functions
 from this event handler. `repeatedly_execute_always` is called
 **before** the game entities (characters, rooms, etc) get updated.
 Additional information is [available here](RepExec).
+
+Example:
+
+```ags
+int ticks;
+
+function repeatedly_execute_always()
+{
+  ticks++;
+}
+```
+
+will count game cycles, even during blocking actions such as speech or cutscenes.
 
 ---
 
@@ -295,6 +376,17 @@ from this event handler. `late_repeatedly_execute_always` is called
 **after** the game entities (characters, rooms, etc) have been
 updated, but before the game screen is redrawn.
 
+Example:
+
+```ags
+function late_repeatedly_execute_always()
+{
+  lblPosition.Text = String.Format("%d,%d", cEgo.x, cEgo.y);
+}
+```
+
+will update the label 'lblPosition' with the character's coordinates after the game entities have moved in this cycle.
+
 ---
 
 ### `unhandled_event`
@@ -304,6 +396,20 @@ unhandled_event(LocationType what, CursorMode mode)
 ```
 
 Called when an interaction event occurs for an object, but no corresponding event handler has been set. This is typically used to display a default "I can't do that" type response in-order to avoid having to add unique messages for all in-game interactions. The values of WHAT and MODE tell you what the player did. The possible values for WHAT are defined by [LocationType](StandardEnums#locationtype) enum, and MODE is one of the cursor modes.
+
+Example:
+
+```ags
+function unhandled_event(LocationType what, CursorMode mode)
+{
+  if (what == eLocationHotspot && mode == eModeTalk)
+  {
+    player.Say("I can't talk to that.");
+  }
+}
+```
+
+will make the player say a default response when the Talk mode is used on a hotspot that has no event handler for it.
 
 ---
 
@@ -318,3 +424,17 @@ This callback can only be declared on Room Script.
 It's called after the function `CallRoomScript(value)` is executed,
 but not immediately. You can read an arbitrary integer value passed
 from `CallRoomScript`. Additional information is [available here](Globalfunctions_General#callroomscript).
+
+Example:
+
+```ags
+function on_call(int value)
+{
+  if (value == 1)
+  {
+    Display("Room script was called with 1.");
+  }
+}
+```
+
+will print the message in the room script when the global script calls `CallRoomScript(1)`.

@@ -73,6 +73,17 @@ bool Pathfinder.IsWalkableAt(int x, int y)
 
 Gets whether given coordinates can be walked on.
 
+Example:
+
+```ags
+if (!Room.PathFinder.IsWalkableAt(mouse.x, mouse.y))
+{
+  Display("You cannot walk there.");
+}
+```
+
+will print a message if the position under the mouse cursor is not walkable.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 *See also:*
@@ -87,6 +98,18 @@ Point* Pathfinder.NearestWalkablePoint(int x, int y)
 ```
 
 Finds the nearest walkable position, close to the given coordinates. Returns null if no walkable position is found.
+
+Example:
+
+```ags
+Point *p = Room.PathFinder.NearestWalkablePoint(mouse.x, mouse.y);
+if (p != null)
+{
+  player.Walk(p.x, p.y);
+}
+```
+
+will walk the player to the walkable position nearest to the mouse cursor, if there is any.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 

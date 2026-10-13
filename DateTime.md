@@ -50,6 +50,15 @@ Returns a DateTime set as created.
 Because of how DateTime is implemented in AGS engine, it only supports a range of dates between January 1970 to January 2038 (inclusive).
 It returns invalid object if year is below 1970 or above 2038, or if any other value is invalid.
 
+Example:
+
+```ags
+DateTime *dt = DateTime.CreateFromDate(2000, 12, 31, 23, 59, 59);
+Display("%d/%d/%d", dt.DayOfMonth, dt.Month, dt.Year);
+```
+
+will create a DateTime for the last second of the year 2000 and display its date.
+
 *Compatibility:* Supported by **AGS 3.6.2** and later versions.
 
 *See also:* [`DateTime.Now`](DateTime#datetimenow),
@@ -69,6 +78,15 @@ It returns invalid object if rawTime is negative.
 This function may be useful, for example, if you write "raw time" from a DateTime.Now in a file, and load it back later.
 
 **NOTE:** the raw time mentioned here is sometimes also known as UNIX time, stored as a 32-bit signed integer.
+
+Example:
+
+```ags
+DateTime *dt = DateTime.CreateFromRawTime(86400);
+Display("%d/%d/%d", dt.DayOfMonth, dt.Month, dt.Year);
+```
+
+will create a DateTime from a raw time of 86400 seconds and display its date.
 
 *Compatibility:* Supported by **AGS 3.6.2** and later versions.
 

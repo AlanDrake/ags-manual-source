@@ -70,6 +70,17 @@ It's always safe to delete a viewport, even if it's the last viewport remaining:
 
 **IMPORTANT:** in **Screen.Viewports** array viewports are arranged in the order they were created. When you delete one in the middle all the following viewports will be shifted towards beginning of array.
 
+Example:
+
+```ags
+Viewport *view = Viewport.Create();
+view.SetPosition(10, 10, 100, 60);
+// ... use the viewport ...
+view.Delete();
+```
+
+will create a new viewport and delete it when it is no longer needed.
+
 *See also:* [`Viewport.Create`](Viewport#viewportcreate), [`Screen.Viewport`](Screen#screenviewport), [`Screen.Viewports`](Screen#screenviewports)
 
 ---
@@ -228,6 +239,14 @@ int Viewport.Height;
 
 Gets/sets the viewport's height in screen coordinates.
 
+Example:
+
+```ags
+Screen.Viewport.Height = Screen.Height / 2;
+```
+
+will make the primary viewport cover only the upper half of the screen.
+
 *See also:* [`Viewport.SetPosition`](Viewport#viewportsetposition), [`Viewport.X`](Viewport#viewportx), [`Viewport.Y`](Viewport#viewporty), [`Viewport.Width`](Viewport#viewportwidth), [`Viewport.ZOrder`](Viewport#viewportzorder), [`Screen.AutoSizeViewportOnRoomLoad`](Screen#screenautosizeviewportonroomload)
 
 ---
@@ -239,6 +258,15 @@ ShaderInstance* Viewport.Shader
 ```
 
 Gets/sets the shader of this viewport.
+
+Example:
+
+```ags
+ShaderProgram* wave = ShaderProgram.CreateFromFile("$DATA$/Shaders/wave.glsl");
+Screen.Viewport.Shader = wave.Default;
+```
+
+will apply the default instance of the shader to the primary viewport.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -252,6 +280,14 @@ bool Viewport.Visible;
 
 Gets/sets whether the viewport is enabled and drawn on screen.
 
+Example:
+
+```ags
+Screen.Viewport.Visible = false;
+```
+
+will hide the primary viewport, so the room is no longer drawn on screen.
+
 ---
 
 ### `Viewport.Width`
@@ -261,6 +297,14 @@ int Viewport.Width;
 ```
 
 Gets/sets the viewport's width in screen coordinates.
+
+Example:
+
+```ags
+Screen.Viewport.Width = Screen.Width / 2;
+```
+
+will make the primary viewport cover only the left half of the screen.
 
 *See also:* [`Viewport.SetPosition`](Viewport#viewportsetposition), [`Viewport.X`](Viewport#viewportx), [`Viewport.Y`](Viewport#viewporty), [`Viewport.Height`](Viewport#viewportheight), [`Viewport.ZOrder`](Viewport#viewportzorder), [`Screen.AutoSizeViewportOnRoomLoad`](Screen#screenautosizeviewportonroomload)
 

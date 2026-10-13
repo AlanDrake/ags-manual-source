@@ -98,6 +98,17 @@ int  Region.GetProperty(const string property)
 
 Gets an integer custom property for this region.
 
+Example:
+
+```ags
+if (region[1].GetProperty("Damage") > 0)
+{
+  Display("Region 1 hurts!");
+}
+```
+
+will print the message if region 1 has its "Damage" property set to more than 0.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -109,6 +120,15 @@ String Region.GetTextProperty(const string property)
 ```
 
 Gets a text custom property for this region.
+
+Example:
+
+```ags
+String sound = region[1].GetTextProperty("StepSound");
+Display("Region 1 uses the step sound '%s'.", sound);
+```
+
+will print the value of region 1's "StepSound" text property.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -122,6 +142,14 @@ bool Region.SetProperty(const string property, int value)
 
 Sets an integer custom property for this region.
 
+Example:
+
+```ags
+region[1].SetProperty("Damage", 5);
+```
+
+will set the "Damage" property of region 1 to 5.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -133,6 +161,14 @@ bool Region.SetTextProperty(const string property, const string value)
 ```
 
 Sets a text custom property for this region.
+
+Example:
+
+```ags
+region[1].SetTextProperty("StepSound", "gravel");
+```
+
+will set the "StepSound" text property of region 1 to "gravel".
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -492,6 +528,17 @@ This property is read-only; to change it, use the
 
 **NOTE:** If the [`Region.TintEnabled`](Region#regiontintenabled)
 property is false, then this value is meaningless.
+
+Example:
+
+```ags
+if (region[1].TintEnabled)
+{
+  Display("Region 1's tint luminance is %d.", region[1].TintLuminance);
+}
+```
+
+will display the luminance setting of region 1's tint, if the tint is enabled.
 
 *See also:* [`Region.Tint`](Region#regiontint),
 [`Region.TintEnabled`](Region#regiontintenabled),

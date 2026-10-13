@@ -60,6 +60,20 @@ DialogOptionsRenderingInfo.Update().
 run `dialog_options_render`, render function will be run at least after
 current script ends.
 
+Example:
+
+```ags
+function dialog_options_repexec(DialogOptionsRenderingInfo *info)
+{
+  if (Game.TickCounter % 40 == 0)
+  {
+    info.Update();
+  }
+}
+```
+
+will make the dialog options redraw once per second (at 40 game ticks per second), for example to update an animated element.
+
 *Compatibility:* Supported by **AGS 3.4.0** and later versions.
 
 ---

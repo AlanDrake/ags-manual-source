@@ -73,6 +73,17 @@ void Button.Click()
 Forces Button's OnClick event. If there is a script function bound to
 that event then it will be run, otherwise nothing happens.
 
+Example:
+
+```ags
+function cmdTrigger_OnClick(GUIControl *control, MouseButton button)
+{
+  btnStart.Click();
+}
+```
+
+will make the click on the 'cmdTrigger' control act as if the player had clicked the 'btnStart' button, running its OnClick handler.
+
 *Compatibility:* Supported by **AGS 3.4.0** and later versions.
 
 *See also:* [`GUI.Click`](GUI#guiclick),
@@ -89,6 +100,17 @@ bool Button.RunFrameEvent(int view, int loop, int frame)
 If the specified view frame has a "EventName" property set, then triggers Button's OnFrameEvent event. If there is a script function bound to that event then it will be run, otherwise nothing happens.
 
 Returns TRUE if the view frame has an event name tag, and FALSE otherwise.
+
+Example:
+
+```ags
+if (btnAnim.RunFrameEvent(btnAnim.View, btnAnim.Loop, btnAnim.Frame))
+{
+  Display("The current frame has an event name.");
+}
+```
+
+will fire the OnFrameEvent for the button's current animation frame, and tell the player if that frame had an event name set.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -140,6 +162,17 @@ Graphic property will hold its sprite number).
 This property is read-only. To change button's animation, use the
 [`Animate`](Button#buttonanimate) command.
 
+Example:
+
+```ags
+if (btnDeathAnim.Animating)
+{
+  Display("The button is showing frame %d of loop %d.", btnDeathAnim.Frame, btnDeathAnim.Loop);
+}
+```
+
+will report which frame and loop are being displayed on the button while it is animating.
+
 *Compatibility:* Supported by **AGS 3.4.1** and later versions.
 
 *See also:* [`Button.Animating`](Button#buttonanimating),
@@ -161,6 +194,17 @@ Graphic property will hold its sprite number).
 
 This property is read-only. To change button's animation, use the
 [`Animate`](Button#buttonanimate) command.
+
+Example:
+
+```ags
+if (btnDeathAnim.Animating)
+{
+  Display("The button is playing loop %d.", btnDeathAnim.Loop);
+}
+```
+
+will tell which loop of the view the animated button is currently showing.
 
 *Compatibility:* Supported by **AGS 3.4.1** and later versions.
 
@@ -184,6 +228,17 @@ Graphic property will hold its sprite number).
 This property is read-only. To change button's animation, use the
 [`Animate`](Button#buttonanimate) command.
 
+Example:
+
+```ags
+if (btnDeathAnim.Animating && btnDeathAnim.View == VPLAYERDEATH)
+{
+  Display("The button is playing the death animation.");
+}
+```
+
+will check if the button is currently animating using the view VPLAYERDEATH.
+
 *Compatibility:* Supported by **AGS 3.4.1** and later versions.
 
 *See also:* [`Button.Animate`](Button#buttonanimate),
@@ -202,6 +257,14 @@ int Button.BorderShadeColor
 Gets/sets the alternate border color that will be used for 3D effect. This color will be used under two conditions:
 * if [`ShowBorder`](GUIControl#guicontrolshowborder) property is enabled.
 * if [`ColorStyle`](Button#buttoncolorstyle) is Default or Dynamic (NOT DynamicFlat).
+
+Example:
+
+```ags
+btnStart.BorderShadeColor = Game.GetColorFromRGB(64, 64, 64);
+```
+
+will set the button's alternate 3D border color to dark gray.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -368,6 +431,20 @@ readonly bool Button.IsHighlighted
 
 Tells whether the button is currently in "highlighted" state, which is when the mouse cursor is hovering over.
 
+Example:
+
+```ags
+function repeatedly_execute()
+{
+  if (btnStart.IsHighlighted)
+  {
+    lblHint.Text = "Starts a new game";
+  }
+}
+```
+
+will show a hint in the 'lblHint' label while the mouse cursor is over the 'btnStart' button.
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 *See also:* [`Button.IsPushed`](Button#buttonispushed)
@@ -381,6 +458,24 @@ readonly bool Button.IsPushed
 ```
 
 Tells whether the button is currently in "pushed" state, which is when it's being clicked on with mouse button, but not released yet.
+
+Example:
+
+```ags
+function repeatedly_execute()
+{
+  if (btnRun.IsPushed)
+  {
+    player.SetWalkSpeed(6, 6);
+  }
+  else
+  {
+    player.SetWalkSpeed(3, 3);
+  }
+}
+```
+
+will make the player walk faster for as long as the 'btnRun' button is held down.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -397,6 +492,15 @@ int Button.MouseOverBackgroundColor
 Gets/sets the background color that will be used when the cursor is hovering this button. This color will be used under two conditions:
 * if [`SolidBackground`](GUIControl#guicontrolsolidbackground) property is enabled.
 * if [`ColorStyle`](Button#buttoncolorstyle) is either Dynamic or DynamicFlat.
+
+Example:
+
+```ags
+btnStart.SolidBackground = true;
+btnStart.MouseOverBackgroundColor = Game.GetColorFromRGB(0, 96, 160);
+```
+
+will make the button's background turn blue when the mouse cursor hovers over it (provided that the button's ColorStyle is Dynamic or DynamicFlat).
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -416,6 +520,15 @@ int Button.MouseOverBorderColor
 Gets/sets the border color that will be used when the cursor is hovering this button. This color will be used under two conditions:
 * if [`ShowBorder`](GUIControl#guicontrolshowborder) property is enabled.
 * if [`ColorStyle`](Button#buttoncolorstyle) is DynamicFlat.
+
+Example:
+
+```ags
+btnStart.ShowBorder = true;
+btnStart.MouseOverBorderColor = Game.GetColorFromRGB(255, 255, 0);
+```
+
+will make the button's border turn yellow when the mouse cursor hovers over it (provided that the button's ColorStyle is DynamicFlat).
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -459,6 +572,14 @@ int Button.MouseOverTextColor
 ```
 
 Gets/sets the text color that will be used when the cursor is hovering this button.
+
+Example:
+
+```ags
+btnStart.MouseOverTextColor = Game.GetColorFromRGB(255, 255, 0);
+```
+
+will make the button's text turn yellow when the mouse cursor hovers over it.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -509,6 +630,15 @@ Gets/sets the background color that will be used when the button is being pushed
 * if [`SolidBackground`](GUIControl#guicontrolsolidbackground) property is enabled.
 * if [`ColorStyle`](Button#buttoncolorstyle) is either Dynamic or DynamicFlat.
 
+Example:
+
+```ags
+btnStart.SolidBackground = true;
+btnStart.PushedBackgroundColor = Game.GetColorFromRGB(0, 48, 96);
+```
+
+will make the button's background turn dark blue while the button is held down (provided that the button's ColorStyle is Dynamic or DynamicFlat).
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 *See also:* [`GUIControl.BackgroundColor`](GUIControl#guicontrolbackgroundcolor),
@@ -527,6 +657,15 @@ int Button.PushedBorderColor
 Gets/sets the border color that will be used when the button is being pushed. This color will be used under two conditions:
 * if [`ShowBorder`](GUIControl#guicontrolshowborder) property is enabled.
 * if [`ColorStyle`](Button#buttoncolorstyle) is DynamicFlat.
+
+Example:
+
+```ags
+btnStart.ShowBorder = true;
+btnStart.PushedBorderColor = Game.GetColorFromRGB(255, 128, 0);
+```
+
+will make the button's border turn orange while the button is held down (provided that the button's ColorStyle is DynamicFlat).
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -571,6 +710,14 @@ int Button.PushedTextColor
 ```
 
 Gets/sets the text color that will be used when the button is being pushed.
+
+Example:
+
+```ags
+btnStart.PushedTextColor = Game.GetColorFromRGB(200, 200, 200);
+```
+
+will make the button's text turn light gray while the button is held down.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -633,6 +780,15 @@ Gets/sets how the text is aligned relative to the button's rectangle.
 
 If the button has no text set, then this property has no effect.
 
+Example:
+
+```ags
+btnStart.Text = "Start";
+btnStart.TextAlignment = eAlignTopLeft;
+```
+
+will draw the button's text in the top left corner of the button.
+
 *See also:* [Alignment enum](StandardEnums#alignment),
 [`Button.NormalGraphic`](Button#buttonnormalgraphic)
 [`Button.Text`](Button#buttontext)
@@ -673,6 +829,14 @@ int Button.TextOutlineColor;
 
 Gets/sets the color used to display the text's outline, but only if the button's Font uses outline. If the font has no outline, then this property has no effect.
 
+Example:
+
+```ags
+btnStart.TextOutlineColor = Game.GetColorFromRGB(0, 0, 0);
+```
+
+will draw the button's text outline in black (only if the button's font has an outline).
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 *See also:* [`Button.TextColor`](Button#buttonfont),
@@ -712,6 +876,14 @@ int Button.TextPaddingVertical;
 ```
 
 Gets/sets amount of padding, restricting the text from top and bottom.
+
+Example:
+
+```ags
+btnStart.TextPaddingVertical = 4;
+```
+
+will keep the button's text 4 pixels away from the button's top and bottom edges.
 
 *Compatibility:* Supported by **AGS 3.6.2** and later versions.
 

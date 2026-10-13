@@ -24,6 +24,16 @@ DrawingSurface.BlendImage(int x, int y, int spriteSlot, BlendMode mode, optional
 
 Blends a sprite onto the surface with its top-left corner at (x,y).
 
+Example:
+
+```ags
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.BlendImage(100, 80, 300, eBlendAdd, 50);
+surface.Release();
+```
+
+will blend the sprite 300 onto the room background using the additive mode and 50% transparency, with its top-left corner at 100,80.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 *See also:*
@@ -42,6 +52,21 @@ Gets/sets the current BlendMode that will be used for drawing onto this surface.
 
 By default, a DrawingSurface uses the `eBlendNormal` mode, if you want to draw replacing the color, like when erasing, use `eBlendCopy` instead.
 
+Example:
+
+```ags
+DynamicSprite *sprite = DynamicSprite.Create(32, 32, true);
+DrawingSurface *surface = sprite.GetDrawingSurface();
+surface.DrawingColor = 15;
+surface.DrawRectangle(0, 0, 31, 31);
+surface.BlendMode = eBlendCopy;
+surface.DrawingColor = 0;
+surface.DrawRectangle(8, 8, 23, 23);
+surface.Release();
+```
+
+will draw a filled rectangle, then erase its center by drawing with the copy blend mode, which replaces the color instead of drawing over it.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 *See also:* [`BlendMode`](StandardEnums#blendmode)
@@ -55,6 +80,21 @@ DrawingSurface.BlendSurface(DrawingSurface *surfaceToDraw, BlendMode mode, optio
 ```
 
 Blends the specified surface onto this surface.
+
+Example:
+
+```ags
+DynamicSprite *sprite = DynamicSprite.Create(32, 32, true);
+DrawingSurface *source = sprite.GetDrawingSurface();
+source.DrawingColor = 15;
+source.DrawRectangle(0, 0, 31, 31);
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.BlendSurface(source, eBlendAdd, 50, 100, 80);
+surface.Release();
+source.Release();
+```
+
+will draw a white square on a dynamic sprite, and then blend it onto the room background at 100,80 using the additive mode and 50% transparency.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -103,9 +143,26 @@ in the middle of it.
 readonly int DrawingSurface.ColorDepth
 ```
 
-Gets the colour depth of this surface.
+Gets the color depth of the surface, in bits per pixel (8, 16, or 32).
 
-*Compatibility:* Supported by **AGS 4.0.0** and later versions.
+Example:
+
+```ags
+DynamicSprite *sprite = DynamicSprite.Create(32, 32);
+DrawingSurface *surface = sprite.GetDrawingSurface();
+if (surface.ColorDepth == 32)
+{
+  Display("This is a 32-bit surface.");
+}
+surface.Release();
+```
+
+will create a dynamic sprite and tell if its drawing surface has the 32-bit color depth.
+
+*Compatibility:* Supported by **AGS 3.6.3** and later versions.
+
+*See also:* [`DrawingSurface.Height`](DrawingSurface#drawingsurfaceheight),
+[`DrawingSurface.Width`](DrawingSurface#drawingsurfacewidth)
 
 ---
 
@@ -628,6 +685,16 @@ DrawingSurface.SetPixel(int x, int y, int color)
 
 Changes the colour of a single pixel on the surface. This operation ignores drawing settings, and simply sets the color value.
 
+Example:
+
+```ags
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+surface.SetPixel(100, 80, Game.GetColorFromRGB(255, 0, 0));
+surface.Release();
+```
+
+will set the pixel at 100,80 on the room background to red.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 *See also:*
@@ -796,6 +863,21 @@ If the data format does not match, there will be no error reported, but the look
 
 Because copying whole pixel data is a *relatively* slow operation, this function is worth using when you need to perform a large number of changes over image's pixels at once. When you only need to set a few pixels, it's much better to use [`DrawPixel`](DrawingSurface#drawingsurfacedrawpixel) instead.
 
+Example:
+
+```ags
+DrawingSurface *surface = WalkableArea.GetDrawingSurface();
+char pixels[] = new char[100];
+for (int i = 0; i < 100; i++)
+{
+  pixels[i] = 1;
+}
+surface.SetPixels(pixels, 20, 20, 10, 10);
+surface.Release();
+```
+
+will fill a 10x10 region at 20,20 of the 8-bit walkable mask with the walkable area 1, copying all the 100 bytes (one per pixel) in a single call.
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 *See also:* [`DrawingSurface.GetPixelsCopy`](DrawingSurface#drawingsurfacegetpixelscopy),
@@ -891,21 +973,6 @@ Because copying whole pixel data is a *relatively* slow operation, this function
 
 ---
 
-### `DrawingSurface.ColorDepth`
-
-```ags
-readonly int DrawingSurface.ColorDepth
-```
-
-Gets the color depth of the surface, in bits per pixel (8, 16, or 32).
-
-*Compatibility:* Supported by **AGS 3.6.3** and later versions.
-
-*See also:* [`DrawingSurface.Height`](DrawingSurface#drawingsurfaceheight),
-[`DrawingSurface.Width`](DrawingSurface#drawingsurfacewidth)
-
----
-
 ### `DrawingSurface.Height`
 
 ```ags
@@ -939,6 +1006,19 @@ Gets whether the drawing surface is valid to be used, and is actually linked to 
 
 The drawing surface may become invalid if it was acquired from a dynamic sprite and that sprite got deleted, or if it was acquired from a room background but the room was changed. Any operation on an invalid DrawingSurface will be ignored.
 In general, it is not recommended to keep DrawingSurface objects for a prolonged period of time, nor store them in a global variable. But if you do so for some reasons, and there's a chance that the underlying image is disposed, then this property may help to double check if it's safe to still use the surface for drawing.
+
+Example:
+
+```ags
+DrawingSurface *surface = Room.GetDrawingSurfaceForBackground();
+// ... the player changes to another room here ...
+if (!surface.Valid)
+{
+  Display("The surface is no longer valid.");
+}
+```
+
+will check if the drawing surface may still be used; it becomes invalid after the room it was acquired from is left.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 

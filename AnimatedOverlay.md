@@ -26,6 +26,20 @@ functions.
 
 **NOTE:** if the player goes to a different room all active overlays are removed automatically.
 
+Example:
+
+```ags
+AnimatedOverlay* ovl;
+
+function game_start()
+{
+  ovl = AnimatedOverlay.CreateAnimated(100, 100);
+  ovl.Animate(VFLAME, 0, 4, eRepeat);
+}
+```
+
+will create an animated overlay on the screen and play the loop 0 of the view VFLAME on it, repeating continuously.
+
 ---
 
 ### `AnimatedOverlay.CreateRoomAnimated`
@@ -43,6 +57,20 @@ script function where it was created, the `AnimatedOverlay*` variable declaratio
 functions.
 
 **NOTE:** if the player goes to a different room all active overlays are removed automatically.
+
+Example:
+
+```ags
+AnimatedOverlay* ovl;
+
+function room_AfterFadeIn()
+{
+  ovl = AnimatedOverlay.CreateRoomAnimated(100, 100);
+  ovl.Animate(VFLAME, 0, 4, eRepeat);
+}
+```
+
+will create an animated overlay in the room and play the loop 0 of the view VFLAME on it, repeating continuously.
 
 ---
 
@@ -68,6 +96,15 @@ Note that for compatibility reasons if direction is eBackwards the animation act
 
 *Volume* lets you specify the relative volume in percents (0-100) of the frame-linked sounds for the duration of this animation. It's 100 by default (which means - unchanged).
 
+Example:
+
+```ags
+AnimatedOverlay* ovl = AnimatedOverlay.CreateAnimated(100, 100);
+ovl.Animate(VFLAME, 0, 4, eOnce, eBlock);
+```
+
+will play the loop 0 of the view VFLAME once on the animated overlay, and wait until the animation is over.
+
 ---
 
 ### `AnimatedOverlay.Animating`
@@ -77,6 +114,20 @@ bool AnimatedOverlay.Animating
 ```
 
 Tells whether the overlay is currently animating.
+
+Example:
+
+```ags
+AnimatedOverlay* ovl = AnimatedOverlay.CreateAnimated(100, 100);
+ovl.Animate(VFLAME, 0, 4, eOnce, eNoBlock);
+while (ovl.Animating)
+{
+  Wait(1);
+}
+Display("The animation is over.");
+```
+
+will start the animation without blocking, and then wait until it stops.
 
 ---
 
@@ -88,6 +139,17 @@ int AnimatedOverlay.Animating
 
 Gets the current frame number during an animation.
 
+Example:
+
+```ags
+AnimatedOverlay* ovl = AnimatedOverlay.CreateAnimated(100, 100);
+ovl.Animate(VFLAME, 0, 4, eRepeat);
+Wait(20);
+Display("The overlay shows frame %d of loop %d.", ovl.Frame, ovl.Loop);
+```
+
+will start an animation and, after a short while, tell which frame and loop of the view are currently displayed.
+
 ---
 
 ### `AnimatedOverlay.Loop`
@@ -97,6 +159,16 @@ int AnimatedOverlay.Loop
 ```
 
 Gets the current loop number during an animation.
+
+Example:
+
+```ags
+AnimatedOverlay* ovl = AnimatedOverlay.CreateAnimated(100, 100);
+ovl.Animate(VFLAME, 2, 4, eRepeat);
+Display("The overlay is playing loop %d.", ovl.Loop);
+```
+
+will start playing the loop 2 of the view VFLAME and tell which loop is being displayed.
 
 ---
 
@@ -108,6 +180,18 @@ bool AnimatedOverlay.PauseWithGame
 
 Gets whether the overlay's animation is paused when the game is paused.
 
+Example:
+
+```ags
+AnimatedOverlay* ovl = AnimatedOverlay.CreateAnimated(100, 100, 0, true);
+if (ovl.PauseWithGame)
+{
+  Display("The animation will pause when the game is paused.");
+}
+```
+
+will create an animated overlay that pauses with the game and confirm that it does.
+
 ---
 
 ### `AnimatedOverlay.View`
@@ -117,3 +201,13 @@ int AnimatedOverlay.View
 ```
 
 Gets the current view number during an animation.
+
+Example:
+
+```ags
+AnimatedOverlay* ovl = AnimatedOverlay.CreateAnimated(100, 100);
+ovl.Animate(VFLAME, 0, 4, eRepeat);
+Display("The overlay is playing the view %d.", ovl.View);
+```
+
+will start playing the view VFLAME and tell which view is being displayed.

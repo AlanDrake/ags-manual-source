@@ -281,6 +281,15 @@ static ShaderInstance* Room.BackgroundShader
 
 Gets/sets the current Room's background shader.
 
+Example:
+
+```ags
+ShaderProgram* sepia = ShaderProgram.CreateFromFile("$DATA$/Shaders/sepia.glsl");
+Room.BackgroundShader = sepia.Default;
+```
+
+will apply the default instance of the shader to the current room's background.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -335,6 +344,14 @@ static float Room.FaceDirectionRatio
 
 Gets/sets the optional y/x ratio of character's facing directions, determining directional loop selection for each Character in the current room.
 
+Example:
+
+```ags
+Room.FaceDirectionRatio = 1.5;
+```
+
+will set the y/x ratio that characters use to select their directional loops in the current room to 1.5.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -367,6 +384,14 @@ readonly static int Room.HotspotCount
 
 Returns the number of hotspots in the room.
 
+Example:
+
+```ags
+Display("This room has %d hotspots.", Room.HotspotCount);
+```
+
+will display the number of hotspots in the current room.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -378,6 +403,17 @@ static readonly Hotspot *Room.Hotspots[]
 ```
 
 Accesses the Hotspots in the current room.
+
+Example:
+
+```ags
+for (int i = 0; i < Room.HotspotCount; i++)
+{
+  Display("Hotspot %d is '%s'.", i, Room.Hotspots[i].Name);
+}
+```
+
+will display the names of all hotspots in the current room.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -433,6 +469,14 @@ static readonly String Room.Name
 
 Gets the current Room's name (description)
 
+Example:
+
+```ags
+Display("You are in the room '%s'.", Room.Name);
+```
+
+will display the name (description) of the current room.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -444,6 +488,14 @@ static readonly int Room.Number
 ```
 
 Gets the current Room's number
+
+Example:
+
+```ags
+Display("You are in the room number %d.", Room.Number);
+```
+
+will display the number of the current room.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -475,6 +527,17 @@ static readonly Object *Room.Objects[]
 
 Accesses the Objects in the current room.
 
+Example:
+
+```ags
+for (int i = 0; i < Room.ObjectCount; i++)
+{
+  Room.Objects[i].Visible = false;
+}
+```
+
+will hide all the objects in the current room.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -486,6 +549,18 @@ static readonly Pathfinder *Room.PathFinder
 ```
 
 Gets the current Room's Pathfinder object that lets find route around walkable areas.
+
+Example:
+
+```ags
+Point* path[] = Room.PathFinder.FindPath(cEgo.x, cEgo.y, 200, 120);
+if (path == null)
+{
+  Display("There is no way to get there.");
+}
+```
+
+will use the current room's pathfinder to look for a route for the character, and tell if there is none.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -503,6 +578,14 @@ readonly static int Room.RegionCount
 
 Returns the number of regions in the room.
 
+Example:
+
+```ags
+Display("This room has %d regions.", Room.RegionCount);
+```
+
+will display the number of regions in the current room.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -514,6 +597,17 @@ static readonly Region *Room.Regions[]
 ```
 
 Accesses the Regions in the current room.
+
+Example:
+
+```ags
+for (int i = 0; i < Room.RegionCount; i++)
+{
+  Room.Regions[i].Enabled = false;
+}
+```
+
+will disable all the regions in the current room.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -569,6 +663,14 @@ readonly static int Room.WalkableAreaCount
 
 Returns the number of walkable areas in the room.
 
+Example:
+
+```ags
+Display("This room has %d walkable areas.", Room.WalkableAreaCount);
+```
+
+will display the number of walkable areas in the current room.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -580,6 +682,17 @@ static readonly WalkableArea *Room.WalkableAreas[]
 ```
 
 Accesses the Walkable areas in the current room.
+
+Example:
+
+```ags
+for (int i = 0; i < Room.WalkableAreaCount; i++)
+{
+  Room.WalkableAreas[i].Enabled = false;
+}
+```
+
+will disable all the walkable areas in the current room.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -593,6 +706,14 @@ readonly static int Room.WalkbehindCount
 
 Returns the number of walk-behinds in the room.
 
+Example:
+
+```ags
+Display("This room has %d walk-behinds.", Room.WalkbehindCount);
+```
+
+will display the number of walk-behinds in the current room.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -604,6 +725,17 @@ static readonly Walkbehind *Room.Walkbehinds[]
 ```
 
 Accesses the Walk-behinds in the current room.
+
+Example:
+
+```ags
+for (int i = 0; i < Room.WalkbehindCount; i++)
+{
+  Room.Walkbehinds[i].Baseline = 100;
+}
+```
+
+will set the baseline of all the walk-behinds in the current room to 100.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 

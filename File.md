@@ -15,6 +15,17 @@ Returns false in any failure and true if it succeeds.
 so `new_filename` parameter must start with one of those.
 See `File.Open` documentation for more information.
 
+Example:
+
+```ags
+if (File.Copy("$SAVEGAMEDIR$/profile.dat", "$SAVEGAMEDIR$/profile.bak"))
+{
+  Display("A backup copy was made.");
+}
+```
+
+will make a backup copy of the file 'profile.dat' in the save game directory, and tell if it succeeded.
+
 *Compatibility:* Supported by **AGS 3.6.2** and later versions.
 
 *See also:* [`File.Open`](File#fileopen), 
@@ -212,6 +223,14 @@ This will process all tokens and all rules described in `File.Open` and return t
 which can be helpful when debugging or when you want to present this information somewhere to help
 debugging some problem in the game. This resolved path should not be re-used in subsequent `File.Open`
 calls.
+
+Example:
+
+```ags
+Display("The save file lives at: %s", File.ResolvePath("$SAVEGAMEDIR$/profile.dat"));
+```
+
+will display the actual system path that the script path "$SAVEGAMEDIR$/profile.dat" points to; this is useful for debugging.
 
 *Compatibility:* Supported by **AGS 3.6.1** and later versions.
 
@@ -456,6 +475,21 @@ float File.ReadRawFloat()
 ```
 
 Reads the next raw 32-bit float from the file.
+
+Example:
+
+```ags
+File *file = File.Open("$SAVEGAMEDIR$/data.bin", eFileWrite);
+file.WriteRawFloat(3.14);
+file.Close();
+
+file = File.Open("$SAVEGAMEDIR$/data.bin", eFileRead);
+float value = file.ReadRawFloat();
+file.Close();
+Display("%.2f", value);
+```
+
+will write a float to a binary file, read it back, and display "3.14".
 
 *Compatibility:* Supported by **AGS 3.6.2** and later versions.
 
@@ -727,6 +761,16 @@ void File.WriteRawFloat(float value)
 ```
 
 Writes a raw 32-bit float to the file.
+
+Example:
+
+```ags
+File *file = File.Open("$SAVEGAMEDIR$/data.bin", eFileWrite);
+file.WriteRawFloat(3.14);
+file.Close();
+```
+
+will write the float value 3.14 to the file 'data.bin' in the save game directory.
 
 *Compatibility:* Supported by **AGS 3.6.2** and later versions.
 

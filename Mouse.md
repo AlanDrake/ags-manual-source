@@ -126,6 +126,15 @@ static ShaderInstance* Mouse.CursorShader
 
 Gets/sets the shader applied to the mouse cursor.
 
+Example:
+
+```ags
+ShaderProgram* glow = ShaderProgram.CreateFromFile("$DATA$/Shaders/glow.glsl");
+Mouse.CursorShader = glow.Default;
+```
+
+will apply the default instance of the shader to the mouse cursor.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -239,6 +248,20 @@ static bool Mouse.IsAnyButtonDown()
 ```
 
 Returns whether ANY of the mouse button's is currently pressed down.
+
+Example:
+
+```ags
+function repeatedly_execute()
+{
+  if (Mouse.IsAnyButtonDown())
+  {
+    Display("A mouse button is being held down.");
+  }
+}
+```
+
+will display a message while the player is holding down any of the mouse buttons.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -360,6 +383,20 @@ Sierra-style right-click cycling through modes. This function will
 choose the next mode marked as a Standard Mode, and will also use the
 Use Inventory mode if the player has an active inventory item.
 
+Example:
+
+```ags
+function on_mouse_click(MouseButton button)
+{
+  if (button == eMouseRight)
+  {
+    Mouse.SelectNextMode();
+  }
+}
+```
+
+will cycle forward through the cursor modes whenever the player right-clicks.
+
 *See also:* [`Mouse.Mode`](Mouse#mousemode)
 
 ---
@@ -374,6 +411,20 @@ Selects the previous enabled mouse cursor mode. This is useful for
 Sierra-style right-click cycling through modes. This function will
 choose the previous mode marked as a Standard Mode, and will also use
 the Use Inventory mode if the player has an active inventory item.
+
+Example:
+
+```ags
+function on_mouse_click(MouseButton button)
+{
+  if (button == eMouseMiddle)
+  {
+    Mouse.SelectPreviousMode();
+  }
+}
+```
+
+will cycle backward through the cursor modes whenever the player middle-clicks.
 
 *See also:* [`Mouse.Mode`](Mouse#mousemode)
 
@@ -477,6 +528,16 @@ Changes the appearance of the mouse cursor to the default for the
 current cursor mode. Use this to restore the cursor picture after you
 changed it with the UseModeGraphic function.
 
+Example:
+
+```ags
+Mouse.UseModeGraphic(eModeWait);
+Wait(80);
+Mouse.UseDefaultGraphic();
+```
+
+will show the Wait cursor for 2 seconds (at 40 game ticks per second), then restore the default cursor graphic for the current mode.
+
 *See also:* [`Mouse.UseModeGraphic`](Mouse#mouseusemodegraphic)
 
 ---
@@ -522,6 +583,14 @@ Gets/sets if the system mouse cursor is automatically locked in the game window 
 
 **NOTE:** the player may toggle mouse lock on and off anytime using **Ctrl + Alt** key combination; but that does not disable autolock on click.
 
+Example:
+
+```ags
+Mouse.AutoLock = true;
+```
+
+will lock the system mouse cursor inside the game window as soon as the player clicks in it.
+
 *Compatibility:* Supported by **AGS 3.6.0** and later versions.
 
 ---
@@ -564,6 +633,16 @@ Gets/sets whether mouse input is enabled in your game. When the mouse input is d
  - mouse cursor is not drawn on screen;
  - clicks are not registered by the game objects or script;
  - mouse position is always reported as (-1,-1), and cannot be changed by a script command.
+
+Example:
+
+```ags
+Mouse.Enabled = false;
+Wait(120);
+Mouse.Enabled = true;
+```
+
+will disable the mouse input for 3 seconds (at 40 game ticks per second) and then enable it again.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 

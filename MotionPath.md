@@ -43,6 +43,18 @@ static MotionPath* MotionPath.Create(Point* path[], float speedx, optional float
 
 Creates a new MotionPath from the array of Points and x/y speed values. Each stage of this path will use same x/y speeds, but may have different velocities, depending on the direction vector between two points.
 
+Example:
+
+```ags
+Point* path[] = Room.PathFinder.FindPath(20, 30, 200, 160);
+if (path != null)
+{
+  MotionPath* motion = MotionPath.Create(path, 2.0, 2.0, eRepeatAlternate);
+}
+```
+
+will find a path between two points in the room and create a MotionPath from it, moving by 2 pixels per step along both axes and going back and forth between the ends of the path.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -55,6 +67,25 @@ static MotionPath* MotionPath.Create2(Point* path[], float speedx[], float speed
 
 Creates a new MotionPath from the array of Points and arrays of x/y speed values per each stage.
 
+Example:
+
+```ags
+Point* path[] = Room.PathFinder.FindPath(20, 30, 200, 160);
+if (path != null)
+{
+  float speedx[] = new float[path.Length];
+  float speedy[] = new float[path.Length];
+  for (int i = 0; i < path.Length; i++)
+  {
+    speedx[i] = 1.0 + IntToFloat(i);
+    speedy[i] = 1.0 + IntToFloat(i);
+  }
+  MotionPath* motion = MotionPath.Create2(path, speedx, speedy);
+}
+```
+
+will find a path between two points in the room and create a MotionPath from it, where every next stage is moved along faster than the previous one. Each stage has its own x/y speed value, given in the speed arrays.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -66,6 +97,19 @@ Point*[] MotionPath.GetPath()
 ```
 
 Gets the copy of an underlying path as an array of Points.
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Point* path[] = motion.GetPath();
+  Display("The path has %d points.", path.Length);
+}
+```
+
+will get a copy of the path the character cEgo is currently moving along, and display the number of points in it.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -89,6 +133,18 @@ If at the same time the current stage was the first stage of this direction, the
 * eOnceAndBack - if current is a starting direction, then Stage remains at the current index (and Progress remains 0); if current is a second direction, then Stage remains at the current index but Direction changes to the opposite (and progress wraps to a value close to 1.0).
 * eRepeat - Stage wraps to opposite end of the path (and progress wraps to a value close to 1.0).
 * eRepeatAlternate - Stage remains at the current index but Direction changes to the opposite (and progress wraps to a value close to 1.0).
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  motion.StepBack();
+}
+```
+
+will make the character cEgo take a step back along the path it is currently walking.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -114,6 +170,36 @@ If at the same time the current stage was the last stage of this direction, then
 * eRepeat - Stage wraps to opposite end of the path (and progress wraps to a value close to 0.0).
 * eRepeatAlternate - Stage remains at the current index but Direction changes to the opposite (and progress wraps to a value close to 0.0).
 
+Example:
+
+```ags
+MotionPath* motion;
+
+function on_key_press(eKeyCode keycode)
+{
+  if (keycode == eKeyM)
+  {
+    Point* path[] = Room.PathFinder.FindPath(20, 30, 200, 160);
+    if (path != null)
+    {
+      motion = MotionPath.Create(path, 2.0);
+    }
+  }
+}
+
+function repeatedly_execute()
+{
+  if (motion != null && !motion.IsCompleted)
+  {
+    motion.StepForward();
+    gBall.X = motion.PositionX;
+    gBall.Y = motion.PositionY;
+  }
+}
+```
+
+will create a path when the player presses M, and then move the GUI gBall along it, advancing one step every game cycle until the end of the path is reached.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -128,6 +214,18 @@ Reset the current path to the certain stage and progress position [0.0, 1.f). If
 
 This function may be used to freely set any stage and progress, disregarding current position and movement speeds.
 
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  motion.Reset();
+}
+```
+
+will reset the path that the character cEgo is walking along to its very beginning (Stage 0, Progress 0.0).
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -139,6 +237,19 @@ readonly bool MotionPath.Valid
 ```
 
 Checks whether this motion path is currently valid. MotionPaths created by you in script should always stay valid, but a MotionPath acquired from a Character or Object stops being valid as soon as that character or object stops moving. In the latter case you need to get a new MotionPath instance from them when they begin moving again.
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+cEgo.StopMoving();
+if (!motion.Valid)
+{
+  Display("The motion path is no longer valid.");
+}
+```
+
+will stop the character and then check the motion path it had been using, which is no longer valid once the movement is over.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -153,6 +264,18 @@ readonly Direction MotionPath.Direction
 Gets this motion path's current moving direction (forwards or backwards).
 
 Note that functions StepForward and StepBackward act relatively to this direction property. If MotionPath's direction is set as eBackwards, then calling StepForward will actually make a move backwards, and calling StepBackward will make a move forward.
+
+Example:
+
+```ags
+MotionPath* motion = oBall.MotionPath;
+if (motion != null && motion.Direction == eBackwards)
+{
+  Display("The object is moving backwards along its path.");
+}
+```
+
+will tell if the object oBall is currently moving backwards along its path.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -173,6 +296,18 @@ Following styles are supported:
 * eRepeat - MotionPath keeps going in the starting direction perpetually, when reaching an end of the path it resets to beginning and continues.
 * eRepeatAlternate - MotionPath keeps going between two ends of the paths perpetually, switching direction every time it reaches either end.
 
+Example:
+
+```ags
+MotionPath* motion = oBall.MotionPath;
+if (motion != null && motion.RepeatStyle == eRepeat)
+{
+  Display("The object keeps going along its path forever.");
+}
+```
+
+will tell if the object oBall repeats its path endlessly.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -184,6 +319,18 @@ readonly WalkWhere MotionPath.WalkWhere
 ```
 
 Gets if this motion path's was generated by pathfinder respecting walkable areas.
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null && motion.WalkWhere == eWalkableAreas)
+{
+  Display("The path respects the walkable areas.");
+}
+```
+
+will tell if the path the character cEgo is walking along was generated by the pathfinder respecting walkable areas.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -197,6 +344,18 @@ readonly bool MotionPath.IsCompleted
 
 Gets whether this motion path has reached the end and an object should stop.
 
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null && motion.IsCompleted)
+{
+  Display("The character has reached the end of the path.");
+}
+```
+
+will tell if the character's path has reached its end.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -208,6 +367,18 @@ readonly int MotionPath.StageCount
 ```
 
 Gets number of path stages. Last stage defines the path's end-point, and there's always at least 2 stages.
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Display("The path consists of %d stages.", motion.StageCount);
+}
+```
+
+will display the number of stages in the path the character cEgo is walking along.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -221,6 +392,21 @@ readonly int MotionPath.StageX[]
 
 Accesses the X coordinate of the each stage's starting position.
 
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  for (int i = 0; i < motion.StageCount; i++)
+  {
+    Display("Stage %d starts at %d,%d.", i, motion.StageX[i], motion.StageY[i]);
+  }
+}
+```
+
+will display the starting position of every stage of the character's current path.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -232,6 +418,21 @@ readonly int MotionPath.StageY[]
 ```
 
 Accesses the Y coordinate of the each stage's starting position.
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  for (int i = 0; i < motion.StageCount; i++)
+  {
+    Display("Stage %d starts at %d,%d.", i, motion.StageX[i], motion.StageY[i]);
+  }
+}
+```
+
+will display the starting position of every stage of the character's current path.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -245,6 +446,18 @@ readonly float MotionPath.StageSpeedX[]
 
 Accesses the horizontal speed magnitude of the each stage.
 
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Display("The first stage's horizontal speed is %.1f.", motion.StageSpeedX[0]);
+}
+```
+
+will display the horizontal speed of the first stage of the character's current path.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -256,6 +469,18 @@ readonly float MotionPath.StageSpeedY[]
 ```
 
 Accesses the vertical speed magnitude of the each stage.
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Display("The first stage's vertical speed is %.1f.", motion.StageSpeedY[0]);
+}
+```
+
+will display the vertical speed of the first stage of the character's current path.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -269,6 +494,18 @@ readonly int MotionPath.Stage
 
 Gets the current stage index.
 
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Display("The character is on stage %d of %d.", motion.Stage + 1, motion.StageCount);
+}
+```
+
+will display which stage of its path the character is currently on.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -280,6 +517,18 @@ readonly float MotionPath.Progress
 ```
 
 Gets the progress of the current stage in the range [0.0, 1.f).
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Display("The current stage is %d percent complete.", FloatToInt(motion.Progress * 100.0));
+}
+```
+
+will display how much of the current stage of the path the character has covered, in percents.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -293,6 +542,18 @@ readonly int MotionPath.PositionX
 
 Gets the current would-be X coordinate of an object.
 
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Display("The character is at %d,%d.", motion.PositionX, motion.PositionY);
+}
+```
+
+will display the position the character has reached along its path.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -304,6 +565,18 @@ readonly int MotionPath.PositionY
 ```
 
 Gets the current would-be Y coordinate of an object.
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Display("The character is at %d,%d.", motion.PositionX, motion.PositionY);
+}
+```
+
+will display the position the character has reached along its path.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -317,6 +590,18 @@ readonly float MotionPath.VelocityX
 
 Gets the current X magnitude of an object's velocity.
 
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Display("The character moves at %.1f,%.1f.", motion.VelocityX, motion.VelocityY);
+}
+```
+
+will display the current horizontal and vertical velocity of the character moving along its path.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -328,3 +613,15 @@ readonly float MotionPath.VelocityY
 ```
 
 Gets the current Y magnitude of an object's velocity.
+
+Example:
+
+```ags
+MotionPath* motion = cEgo.MotionPath;
+if (motion != null)
+{
+  Display("The character moves at %.1f,%.1f.", motion.VelocityX, motion.VelocityY);
+}
+```
+
+will display the current horizontal and vertical velocity of the character moving along its path.

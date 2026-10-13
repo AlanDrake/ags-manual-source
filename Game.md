@@ -120,6 +120,15 @@ static int Game.GetAudioTypeCrossfadeSpeed(AudioType)
 
 Returns the crossfade speed of the specified *AudioType*. This value is defined as volume units per game frame (how fast the clip's volume will fade or gain volume). Value 0 means that this audio type does not allow crossfade.
 
+Example:
+
+```ags
+int speed = Game.GetAudioTypeCrossfadeSpeed(eAudioTypeMusic);
+Display("Music crossfades at %d volume units per game frame.", speed);
+```
+
+will display the crossfade speed of the music audio type.
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 *See also:* 
@@ -136,6 +145,22 @@ static int Game.GetAudioTypeVolume(AudioType)
 ```
 
 Returns the default volume of the specified *AudioType*. This returns either a value in the range of 0 to 100, or -1 if this audio type does not impose any standard volume on its clips (in which case clips begin playing with their own individual default volumes).
+
+Example:
+
+```ags
+int volume = Game.GetAudioTypeVolume(eAudioTypeMusic);
+if (volume == -1)
+{
+  Display("Music clips use their own volume.");
+}
+else
+{
+  Display("The music volume is %d.", volume);
+}
+```
+
+will tell whether the music audio type imposes its own volume on the clips, and if so, what it is.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -188,6 +213,14 @@ static int Game.GetColorFromRGBA(int red, int green, int blue, int alpha)
 ```
 
  Gets the AGS Colour Number for the specified RGBA colour.
+
+Example:
+
+```ags
+int translucentRed = Game.GetColorFromRGBA(255, 0, 0, 128);
+```
+
+will get the color number for a half-transparent red, which you can then use with any color property or drawing function that supports alpha.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -637,6 +670,19 @@ This command will be ignored if a regular blocking voice is currently playing. A
 
 **NOTE:** because of how audiochannels work internally right now voice is always played on the same channel 0, therefore you could also get it as `System.AudioChannels[0]`, but it may not be a good idea to rely on this because channel behavior may change in future.
 
+Example:
+
+```ags
+AudioChannel *channel = Game.PlayVoiceClip(cEgo, 10, true);
+if (channel != null)
+{
+  Wait(40);
+  channel.Stop();
+}
+```
+
+will play the voice clip with the cue number 10 for the character cEgo, as if it was a regular speech, and stop it after one second (at 40 game ticks per second).
+
 *Compatibility:* Supported by **AGS 3.5.0** and later versions.
 
 *See also:* [Voice speech](VoiceSpeech),
@@ -665,6 +711,14 @@ Optionally you can supply a [AudioPriority](StandardEnums#audiopriority) and [Re
 supply these, the defaults set for the audio clip in the editor will be
 used.
 
+Example:
+
+```ags
+AudioChannel *channel = Game.PlayVoiceClipAsType(cEgo, 10, eAudioTypeSound);
+```
+
+will play the voice clip with the cue number 10 for the character cEgo as an audio clip of the Sound audio type, using that type's settings and channels.
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 *See also:* [Voice speech](VoiceSpeech),
@@ -688,6 +742,17 @@ This function is meant for preloading sprites and precreating textures that will
 
 **IMPORTANT:** this function uses the standard sprite and texture caches, and its efficiency depends on the sizes of these caches. If player's config assigns low cache size, the preloaded sprites may exceed that limit, and previously loaded items will get unloaded. Keep this in mind when precaching many sprites at once, and perhaps set higher cache values in default game config.
 
+Example:
+
+```ags
+function room_Load()
+{
+  Game.PrecacheSprite(500);
+}
+```
+
+will load the sprite 500 into the engine's cache when the room is loaded, so that it is ready to be shown without delay later.
+
 *Compatibility:* Supported by **AGS 3.6.1** and later versions.
 
 *See also:* [`Game.PrecacheView`](Game#gameprecacheview)
@@ -706,6 +771,17 @@ This function is similar to [PrecacheSprite](Game#gameprecachesprite), but simpl
 
 **IMPORTANT:** this function uses the standard sprite and texture caches, and its efficiency depends on the sizes of these caches. If player's config assigns low cache size, the preloaded sprites may exceed that limit, and previously loaded items will get unloaded. Keep this in mind when precaching many sprites at once, and perhaps set higher cache values in default game config.
 
+Example:
+
+```ags
+function room_Load()
+{
+  Game.PrecacheView(VPLAYERWALK, 0, 3);
+}
+```
+
+will load all the sprites of the loops 0 to 3 of the view VPLAYERWALK into the engine's cache when the room is loaded.
+
 *Compatibility:* Supported by **AGS 3.6.1** and later versions.
 
 *See also:* [`Game.PrecacheSprite`](Game#gameprecachesprite)
@@ -720,6 +796,14 @@ readonly static int Game.RoomCount
 
 Gets the total number of the rooms in game.
 
+Example:
+
+```ags
+Display("This game has %d rooms.", Game.RoomCount);
+```
+
+will display the total number of rooms in the game.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -732,6 +816,17 @@ readonly static int Game.RoomNumbers[]
 
 Gets the existing room numbers by a sequential index (from 0 to RoomCount - 1); returns -1 if index is not valid.
 
+Example:
+
+```ags
+for (int i = 0; i < Game.RoomCount; i++)
+{
+  Display("Room number %d is %d.", i, Game.RoomNumbers[i]);
+}
+```
+
+will display all the existing room numbers one by one.
+
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
 ---
@@ -743,6 +838,18 @@ readonly static String Game.RoomNames[]
 ```
 
 Gets the room's name (description) by the room's number; returns null if such room does not exist.
+
+Example:
+
+```ags
+for (int i = 0; i < Game.RoomCount; i++)
+{
+  int room_number = Game.RoomNumbers[i];
+  Display("Room %d is called '%s'.", room_number, Game.RoomNames[room_number]);
+}
+```
+
+will display the number and the name of every room in the game.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -873,6 +980,14 @@ static void Game.SetAudioTypeCrossfadeSpeed(AudioType, int speed)
 ```
 
 Changes the crossfade speed of the specified *AudioType*. This value is defined as volume units per game frame (how fast the clip's volume will fade or gain volume). Setting this to 0 will disable crossfade for the audio type's clips.
+
+Example:
+
+```ags
+Game.SetAudioTypeCrossfadeSpeed(eAudioTypeMusic, 2);
+```
+
+will make the music tracks fade in and out at the speed of 2 volume units per game frame.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -1051,7 +1166,23 @@ will simulates a "Ctrl + S" key combination.
 readonly static int Game.SpriteColorDepth[]
 ```
 
-Gets/sets the default y/x ratio of character's facing directions, determining directional loop selection for all Characters in game.
+Gets the color depth of a sprite, in bits per pixel (8, 16, or 32). Returns 0 if no sprite was found at that index.
+
+Example:
+
+```ags
+int depth = Game.SpriteColorDepth[300];
+if (depth == 0)
+{
+  Display("There is no sprite 300.");
+}
+else
+{
+  Display("The sprite 300 has %d bits per pixel.", depth);
+}
+```
+
+will display the color depth of the sprite 300, or tell if there is no such sprite.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -1099,6 +1230,17 @@ Returns the number of audio clips in the game.
 
 This is useful for script modules if you need to iterate through all the
 audio clips for some reason.
+
+Example:
+
+```ags
+for (int i = 0; i < Game.AudioClipCount; i++)
+{
+  Display("Audio clip %d is %s.", i, Game.AudioClips[i].ScriptName);
+}
+```
+
+will display the script names of all the audio clips in the game.
 
 *Compatibility:* Supported by **AGS 3.4.0** and later versions.
 
@@ -1170,6 +1312,18 @@ readonly static int Game.BlockingWaitSkipped
 
 Gets the code which describes how was the last blocking state skipped by a user (or autotimer). The possible code values are explained on the [Wait functions](Globalfunctions_Wait#global-functions-wait) page, but note that BlockingWaitSkipped also returns this code for any other skippable actions, such as speech.
 
+Example:
+
+```ags
+WaitMouseKey(200);
+if (Game.BlockingWaitSkipped != 0)
+{
+  Display("You were in a hurry!");
+}
+```
+
+will print the message if the player skipped the wait with a key or a mouse click before it timed out.
+
 *Compatibility:* Supported by **AGS 3.6.0** and later versions.
 
 *See also:* [`Game.InBlockingWait`](Game#gameinblockingwait), 
@@ -1220,6 +1374,14 @@ static readonly Camera* Game.Camera;
 
 Gets the primary camera. This is the default camera that is created automatically at the start of the game and cannot be deleted.
 
+Example:
+
+```ags
+Game.Camera.SetAt(0, 0);
+```
+
+will move the primary camera to the top left corner of the room.
+
 *Compatibility:* Supported by **AGS 3.5.0** and later versions.
 
 *See also:* [`Game.Cameras`](Game#gamecameras), [`Camera`](Camera), [`Camera.Create`](Camera#cameracreate), [`Camera.Delete`](Camera#cameradelete), [`Viewport.Camera`](Viewport#viewportcamera)
@@ -1233,6 +1395,14 @@ static readonly int Game.CameraCount
 ```
 
 Gets the number of cameras.
+
+Example:
+
+```ags
+Display("There are %d cameras.", Game.CameraCount);
+```
+
+will display the number of cameras that exist in the game.
 
 *Compatibility:* Supported by **AGS 3.5.0** and later versions.
 
@@ -1317,6 +1487,14 @@ static float Game.FaceDirectionRatio
 
 Gets/sets the optional y/x ratio of character's facing directions, determining
 directional loop selection while Character moves and turns.
+
+Example:
+
+```ags
+Game.FaceDirectionRatio = 1.0;
+```
+
+will set the default y/x ratio that characters use to select their directional loops to 1.0.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -1550,6 +1728,14 @@ static int Game.InventoryCursorHotspotColor
 Gets/sets the color used to draw a hotspot marker's dot on a inventory cursor. When this color is set to non-zero value, and [InventoryCursorHotspotGraphic](Game#gameinventorycursorhotspotgraphic) is not set, the hotspot marker will be drawn on top of the active item's cursor image, at position defined by [`InventoryItem.CursorHotspotX`](InventoryItem#inventoryitemcursorhotspotx) and [`InventoryItem.CursorHotspotY`](InventoryItem#inventoryitemcursorhotspoty).
 Setting this property to 0 will disable the colored hotspot marker. The hotspot marker may be still drawn using a sprite if [InventoryCursorHotspotGraphic](Game#gameinventorycursorhotspotgraphic) is set.
 
+Example:
+
+```ags
+Game.InventoryCursorHotspotColor = Game.GetColorFromRGB(255, 255, 255);
+```
+
+will mark the hotspot of an inventory cursor with a white dot.
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 *See also:* [`Mouse.ChangeModeHotspot`](Mouse#mousechangemodehotspot),
@@ -1568,6 +1754,14 @@ static int Game.InventoryCursorHotspotCrossColor
 Gets/sets the color used to draw a hotspot marker's cross on a inventory cursor. When this color is set to non-zero value, and [InventoryCursorHotspotGraphic](Game#gameinventorycursorhotspotgraphic) is not set, the hotspot marker will be drawn on top of the active item's cursor image, at position defined by [`InventoryItem.CursorHotspotX`](InventoryItem#inventoryitemcursorhotspotx) and [`InventoryItem.CursorHotspotY`](InventoryItem#inventoryitemcursorhotspoty).
 Setting this property to 0 will disable the drawing of a cross for the inventory cursor's hotspot. The hotspot marker may be still drawn using a sprite if [InventoryCursorHotspotGraphic](Game#gameinventorycursorhotspotgraphic) is set.
 
+Example:
+
+```ags
+Game.InventoryCursorHotspotCrossColor = Game.GetColorFromRGB(255, 0, 0);
+```
+
+will mark the hotspot of an inventory cursor with a red cross.
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 *See also:* [`Mouse.ChangeModeHotspot`](Mouse#mousechangemodehotspot),
@@ -1585,6 +1779,14 @@ static int Game.InventoryCursorHotspotGraphic
 
 Gets/sets the graphic used as a hotspot marker on a inventory cursor. When set, this graphic will be drawn on top of the active item's cursor image, at position defined by [`InventoryItem.CursorHotspotX`](InventoryItem#inventoryitemcursorhotspotx) and [`InventoryItem.CursorHotspotY`](InventoryItem#inventoryitemcursorhotspoty).
 Setting this property to 0 will disable the hotspot graphic. The hotspot marker may be still drawn if [InventoryCursorHotspotColor](Game#gameinventorycursorhotspotcolor) is set.
+
+Example:
+
+```ags
+Game.InventoryCursorHotspotGraphic = 120;
+```
+
+will draw the sprite 120 over the active item's cursor image, at the item's hotspot position.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
@@ -2021,6 +2223,16 @@ The TickCounter value is a part of the game's save state, which means that it's 
 
 **NOTE:** the max positive value that an integer type can contain in AGS script is 2147483647, which is the max possible value the TickCounter can report. Whenever the number of updates exceeds this value, the counter will be reset and continue from 1. This is highly improbable in practice, because with 60 FPS it would take approximately 414 full days of continuous gameplay to reach that number, but still something to keep in mind.
 
+Example:
+
+```ags
+int start = Game.TickCounter;
+Wait(80);
+Display("%d game updates passed.", Game.TickCounter - start);
+```
+
+will wait for 80 game ticks, and then display how many game updates have passed in the meantime.
+
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
 *See also:*
@@ -2097,6 +2309,14 @@ static bool Game.UseActiveInventoryGraphicForCursor
 
 Gets/sets whether inventory item's [CursorGraphic](InventoryItem#inventoryitemcursorgraphic) will be used when the cursor mode is "use inventory" and there's a active item.
 When disabled, a default graphic of a respective cursor mode will be used instead.
+
+Example:
+
+```ags
+Game.UseActiveInventoryGraphicForCursor = false;
+```
+
+will make the cursor use its default graphic for the "use inventory" mode instead of the inventory item's own cursor graphic.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 

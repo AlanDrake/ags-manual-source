@@ -246,6 +246,18 @@ readonly bool AudioChannel.IsPaused
 Gets whether this audio channel is currently paused. Returns
 *true* if it is, or *false* if it is not.
 
+Example:
+
+```ags
+AudioChannel *channel = System.AudioChannels[0];
+if (channel.IsPaused)
+{
+  channel.Resume();
+}
+```
+
+will resume the audio channel 0 if it is currently paused.
+
 *Compatibility:* Supported by **AGS 3.6.0** and later versions.
 
 *See also:* [`AudioChannel.Pause`](AudioChannel#audiochannelpause), [`AudioChannel.Resume`](AudioChannel#audiochannelresume)
