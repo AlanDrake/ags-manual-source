@@ -96,9 +96,11 @@ Example:
 // the player has turned off the security monitor
 monitorView.Delete();
 monitorCam.Delete();
+monitorView = null;
+monitorCam = null;
 ```
 
-will remove the picture-in-picture view of a security camera. Here `monitorView` and `monitorCam` are global variables, holding the viewport and the camera that were created with Viewport.Create and Camera.Create when the player turned the monitor on.
+will remove the picture-in-picture view of a security camera. Here `monitorView` and `monitorCam` are global variables, holding the viewport and the camera that were created with Viewport.Create and Camera.Create when the player turned the monitor on. The variables are set to null afterwards, so that they don't keep referencing the deleted objects.
 
 *See also:* [`Camera.Create`](Camera#cameracreate), [`Game.Camera`](Game#gamecamera), [`Game.Cameras`](Game#gamecameras)
 
