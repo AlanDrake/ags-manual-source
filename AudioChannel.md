@@ -249,8 +249,19 @@ Gets whether this audio channel is currently paused. Returns
 Example:
 
 ```ags
+AudioChannel* music;
+
+function game_start()
+{
+  music = aMusic1.Play();
+}
+
 function btnMusic_OnClick(GUIControl *control, MouseButton button)
 {
+  if (music == null || music.PlayingClip == null)
+  {
+    return; // the channel is empty, there's nothing to pause
+  }
   if (music.IsPaused)
   {
     music.Resume();
@@ -264,7 +275,7 @@ function btnMusic_OnClick(GUIControl *control, MouseButton button)
 }
 ```
 
-will let the player pause and resume the music by clicking the button btnMusic. Here `music` is a global AudioChannel* variable that received the result of a command such as `aMusic1.Play()`.
+will start the music when the game starts, and let the player pause and resume it by clicking the button btnMusic. The channel is checked first, because `Play` may return null, and the channel becomes empty once the clip has finished playing.
 
 *Compatibility:* Supported by **AGS 3.6.0** and later versions.
 
