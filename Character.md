@@ -1201,15 +1201,14 @@ Moves the character along the path, ignoring walkable areas, without playing his
 Example:
 
 ```ags
-MaskPathfinder* sky = MaskPathfinder.Create(500);
-Point* route[] = sky.FindPath(cBird.x, cBird.y, 280, 40);
-if (route != null)
-{
-  cBird.MovePath(route, eNoBlock);
-}
+Point* route[] = new Point[3];
+route[0] = new Point; route[0].x = 50;  route[0].y = 40;
+route[1] = new Point; route[1].x = 270; route[1].y = 40;
+route[2] = new Point; route[2].x = 160; route[2].y = 100;
+cBird.MovePath(route, eNoBlock, eRepeat);
 ```
 
-will find a route on a separate 8-bit mask (the sprite 500, drawn the same size as the room), which has nothing to do with the room's walkable areas, and move the character cBird along it. MovePath does not play the walking animation, so you may set a flying animation yourself.
+will make the character cBird keep flying through the three points, regardless of the room's walkable areas. MovePath does not play the walking animation, so you may set a flying animation yourself.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -1947,15 +1946,14 @@ Moves the character along the path, ignoring walkable areas, automatically playi
 Example:
 
 ```ags
-MaskPathfinder* roofs = MaskPathfinder.Create(501);
-Point* route[] = roofs.FindPath(cCat.x, cCat.y, 280, 60);
-if (route != null)
-{
-  cCat.WalkPath(route, eNoBlock);
-}
+Point* route[] = new Point[3];
+route[0] = new Point; route[0].x = 40;  route[0].y = 60;
+route[1] = new Point; route[1].x = 160; route[1].y = 50;
+route[2] = new Point; route[2].x = 280; route[2].y = 60;
+cCat.WalkPath(route, eNoBlock);
 ```
 
-will find a route along the rooftops, which are marked on a separate 8-bit mask (the sprite 501, drawn the same size as the room), and make the character cCat walk along it with its walking animation, even though the rooftops are not a part of the room's walkable areas.
+will make the character cCat walk through the three points along the rooftops with its walking animation, even though the rooftops are not a part of the room's walkable areas.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
@@ -4322,8 +4320,6 @@ bool Character.Turning
 
 Gets whether the character is currently turning on spot. This may be when it either is command to face to a different direction, or is changing direction while walking along a path.
 
-*Compatibility*: Supported by **AGS 3.6.3** and later versions.
-
 Example:
 
 ```ags
@@ -4346,6 +4342,8 @@ function room_RepExec()
 ```
 
 will make the guard turn to face the player without blocking the game, and shout only after he has finished turning.
+
+*Compatibility*: Supported by **AGS 3.6.3** and later versions.
 
 *See also:* [`Character.TurnBeforeWalking`](Character#characterturnbeforewalking),
 [`Character.TurnWhenFacing`](Character#characterturnwhenfacing)
