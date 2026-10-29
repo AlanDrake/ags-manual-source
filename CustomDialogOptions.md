@@ -206,7 +206,8 @@ Example:
 function dialog_options_repexec(DialogOptionsRenderingInfo *info)
 {
   info.ActiveOptionID = 0;
-  if (mouse.x < info.X || mouse.x >= info.X + info.Width || mouse.y < info.Y)
+  if (mouse.x < info.X || mouse.x >= info.X + info.Width ||
+      mouse.y < info.Y || mouse.y >= info.Y + info.Height)
   {
     return;
   }
