@@ -87,7 +87,7 @@ The DELAY specifies extra time in ticks between animation frames (in addition to
 
 The *RepeatStyle* parameter sets whether the animation will continuously repeat the cycling through the frames. This can be one of the [RepeatStyle](StandardEnums#repeatstyle) values.
 
-For *blocking* you can pass either `eBlock` (in which case the function will wait for the animation to finish before returning), or `eNoBlock` (in which case the animation will start to play, but your script will continue). The default is `eBlock`.
+For *blocking* you can pass either `eBlock` (in which case the function will wait for the animation to finish before returning), or `eNoBlock` (in which case the animation will start to play, but your script will continue). The default is `eNoBlock`.
 
 *Direction* specifies an initial way in which the animation plays. You can either pass `eForwards` (the default) or `eBackwards`.
 
@@ -133,13 +133,12 @@ function room_RepExec()
 {
   if (explosion != null && !explosion.Animating)
   {
-    explosion.Remove();
     explosion = null;
   }
 }
 ```
 
-will play an explosion without blocking, so that the player keeps control during the animation, and remove the overlay as soon as the animation is over.
+will play an explosion without blocking, so that the player keeps control during the animation, and remove the overlay as soon as the animation is over. Setting the variable to null is enough to remove the overlay, as long as no other variable references it.
 
 ---
 
