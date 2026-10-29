@@ -1649,15 +1649,14 @@ Moves the object along the path, ignoring walkable areas.
 Example:
 
 ```ags
-MaskPathfinder* water = MaskPathfinder.Create(500);
-Point* route[] = water.FindPath(oBoat.X, oBoat.Y, 260, 150);
-if (route != null)
-{
-  oBoat.MovePath(route, 2, eNoBlock);
-}
+Point* route[] = new Point[3];
+route[0] = new Point; route[0].x = 60;  route[0].y = 150;
+route[1] = new Point; route[1].x = 160; route[1].y = 130;
+route[2] = new Point; route[2].x = 260; route[2].y = 150;
+oBoat.MovePath(route, 2, eNoBlock);
 ```
 
-will find a route across the lake, which is marked on a separate 8-bit mask (the sprite 500, drawn the same size as the room), and move the object oBoat along it at speed 2.
+will move the object oBoat through the three points across the lake at speed 2.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
