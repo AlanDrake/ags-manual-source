@@ -260,7 +260,7 @@ function repeatedly_execute()
   }
   else
   {
-    lblLocation.Text = Game.GetLocationName(mouse.x, mouse.y);
+    lblLocation.Text = Game.GetDisplayNameAt(mouse.x, mouse.y);
   }
 }
 ```
