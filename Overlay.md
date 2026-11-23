@@ -1062,12 +1062,12 @@ Overlay's Text property stores an arbitrary value, similar to the Character.Disp
 Example:
 
 ```ags
-signOverlay.Text = "A rusty warning sign";
-// ... later, for example when the player clicks on the overlay:
-player.Say(signOverlay.Text);
+// keep the old message in the history list before replacing it
+lstHistory.AddItem(messageOverlay.Text);
+messageOverlay.SetText(200, Game.SpeechFont, Game.GetColorFromRGB(255, 255, 255), "The door is locked.");
 ```
 
-will store a description in the overlay signOverlay, which can be used later by your own script; the Text property does not change how the overlay looks.
+will add the text which the textual overlay messageOverlay currently shows to the list box lstHistory, and then replace it with a new message. Here `messageOverlay` is a global Overlay*, created with Overlay.CreateTextual.
 
 *Compatibility:* Supported by **AGS 3.6.3** and later versions.
 
