@@ -18,11 +18,7 @@ Gets the sprite number used for this TextWindow's left border.
 Example:
 
 ```ags
-TextWindowGUI *tw = gMyTextGui.AsTextWindow;
-if (tw != null)
-{
-  Display("The left border uses the sprite %d.", tw.LeftGraphic);
-}
+Display("The left border uses the sprite %d.", gMyTextGui.AsTextWindow.LeftGraphic);
 ```
 
 will display the sprite number used for the left border of the text window GUI gMyTextGui.
@@ -43,11 +39,7 @@ Gets the sprite number used for this TextWindow's top-left corner.
 Example:
 
 ```ags
-TextWindowGUI *tw = gMyTextGui.AsTextWindow;
-if (tw != null)
-{
-  Display("The top left corner uses the sprite %d.", tw.TopLeftGraphic);
-}
+Display("The top left corner uses the sprite %d.", gMyTextGui.AsTextWindow.TopLeftGraphic);
 ```
 
 will display the sprite number used for the top left corner of the text window GUI gMyTextGui.
@@ -68,11 +60,7 @@ Gets the sprite number used for this TextWindow's top border.
 Example:
 
 ```ags
-TextWindowGUI *tw = gMyTextGui.AsTextWindow;
-if (tw != null)
-{
-  Display("The top border uses the sprite %d.", tw.TopGraphic);
-}
+Display("The top border uses the sprite %d.", gMyTextGui.AsTextWindow.TopGraphic);
 ```
 
 will display the sprite number used for the top border of the text window GUI gMyTextGui.
@@ -93,11 +81,7 @@ Gets the sprite number used for this TextWindow's top-right corner.
 Example:
 
 ```ags
-TextWindowGUI *tw = gMyTextGui.AsTextWindow;
-if (tw != null)
-{
-  Display("The top right corner uses the sprite %d.", tw.TopRightGraphic);
-}
+Display("The top right corner uses the sprite %d.", gMyTextGui.AsTextWindow.TopRightGraphic);
 ```
 
 will display the sprite number used for the top right corner of the text window GUI gMyTextGui.
@@ -118,11 +102,7 @@ Gets the sprite number used for this TextWindow's right border.
 Example:
 
 ```ags
-TextWindowGUI *tw = gMyTextGui.AsTextWindow;
-if (tw != null)
-{
-  Display("The right border uses the sprite %d.", tw.RightGraphic);
-}
+Display("The right border uses the sprite %d.", gMyTextGui.AsTextWindow.RightGraphic);
 ```
 
 will display the sprite number used for the right border of the text window GUI gMyTextGui.
@@ -143,11 +123,7 @@ Gets the sprite number used for this TextWindow's bottom-right corner.
 Example:
 
 ```ags
-TextWindowGUI *tw = gMyTextGui.AsTextWindow;
-if (tw != null)
-{
-  Display("The bottom right corner uses the sprite %d.", tw.BottomRightGraphic);
-}
+Display("The bottom right corner uses the sprite %d.", gMyTextGui.AsTextWindow.BottomRightGraphic);
 ```
 
 will display the sprite number used for the bottom right corner of the text window GUI gMyTextGui.
@@ -168,11 +144,7 @@ Gets the sprite number used for this TextWindow's bottom border.
 Example:
 
 ```ags
-TextWindowGUI *tw = gMyTextGui.AsTextWindow;
-if (tw != null)
-{
-  Display("The bottom border uses the sprite %d.", tw.BottomGraphic);
-}
+Display("The bottom border uses the sprite %d.", gMyTextGui.AsTextWindow.BottomGraphic);
 ```
 
 will display the sprite number used for the bottom border of the text window GUI gMyTextGui.
@@ -193,11 +165,7 @@ Gets the sprite number used for this TextWindow's bottom-left corner.
 Example:
 
 ```ags
-TextWindowGUI *tw = gMyTextGui.AsTextWindow;
-if (tw != null)
-{
-  Display("The bottom left corner uses the sprite %d.", tw.BottomLeftGraphic);
-}
+Display("The bottom left corner uses the sprite %d.", gMyTextGui.AsTextWindow.BottomLeftGraphic);
 ```
 
 will display the sprite number used for the bottom left corner of the text window GUI gMyTextGui.
@@ -244,11 +212,7 @@ Gets/sets the amount of padding, in pixels, surrounding the text in the TextWind
 Example:
 
 ```ags
-TextWindowGUI *tw = gMyTextGui.AsTextWindow;
-if (tw != null)
-{
-  tw.TextPadding = 6;
-}
+gMyTextGui.AsTextWindow.TextPadding = 6;
 ```
 
 will keep the text 6 pixels away from the borders of the text window GUI gMyTextGui.
