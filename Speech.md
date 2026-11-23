@@ -359,7 +359,7 @@ function repeatedly_execute_always()
 {
   if (Speech.SpeakingCharacter != null)
   {
-    lblSpeaker.Text = Speech.SpeakingCharacter.Name;
+    lblSpeaker.Text = Speech.SpeakingCharacter.DisplayName;
   }
   else
   {
