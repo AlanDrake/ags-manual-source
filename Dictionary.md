@@ -211,7 +211,7 @@ will store a note under the key "lighthouse", and later replace it with a new on
 ### `Dictionary.CompareStyle`
 
 ```ags
-StringCompareStyle Dictionary.CompareStyle
+readonly StringCompareStyle Dictionary.CompareStyle
 ```
 
 Returns the string comparison method for this dictionary, which determines whether its keys are case-sensitive.
@@ -238,7 +238,7 @@ will store a value in any dictionary, converting the key to lowercase first if t
 ### `Dictionary.ItemCount`
 
 ```ags
-int Dictionary.ItemCount
+readonly int Dictionary.ItemCount
 ```
 
 Gets the number of key/value pairs currently in the dictionary.
@@ -256,7 +256,7 @@ will show on the button btnNotes how many notes the player has. Here `notes` is 
 ### `Dictionary.SortStyle`
 
 ```ags
-SortStyle Dictionary.SortStyle
+readonly SortStyle Dictionary.SortStyle
 ```
 
 Returns the key sorting method for this dictionary.
