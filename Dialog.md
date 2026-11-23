@@ -694,5 +694,4 @@ will stop a certain dialog if player presses Escape while dialog options are dis
 *Compatibility:* Prior to **AGS 3.6.2** StopDialog could only work if called from "dialog_request" function.
 
 *See also:* [`Dialog.Start`](Dialog#dialogstart), [`Dialog.Stop`](Dialog#dialogstop),
-[`Dialog.SetOptionState`](Dialog#dialogsetoptionstate),
-[`dialog_request`](Globalfunctions_Event#dialog_request)
+[`Dialog.SetOptionState`](Dialog#dialogsetoptionstate)
