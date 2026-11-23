@@ -67,11 +67,11 @@ Compatibility: Parameters *BlockingStyle*, *Direction*, *frame* and *volume* are
 ### `Button.Click`
 
 ```ags
-void Button.Click()
+void Button.Click(MouseButton button)
 ```
 
 Forces Button's OnClick event. If there is a script function bound to
-that event then it will be run, otherwise nothing happens.
+that event then it will be run, otherwise nothing happens. The *button* is passed to the event function as the mouse button that clicked the Button.
 
 Example:
 
@@ -80,7 +80,7 @@ function on_key_press(eKeyCode keycode, int mod)
 {
   if (keycode == eKeyF5)
   {
-    btnSave.Click();
+    btnSave.Click(eMouseLeft);
   }
 }
 ```
