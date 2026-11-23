@@ -364,7 +364,7 @@ Gets/sets the background color.
 
 Setting BackgroundColor to 0 will make GUI background fully transparent.
 
-This property is ignored if the GUI.BackgroundGraphic is assigned a sprite number (other than 0).
+The background color is used even if the GUI.BackgroundGraphic is assigned a sprite number (other than 0): the sprite is drawn on top of the color, which remains visible through the transparent parts of the sprite.
 
 Example:
 
@@ -372,7 +372,7 @@ Example:
 gInventory.BackgroundColor = Game.GetColorFromRGB(0, 0, 64);
 ```
 
-will fill the background of the GUI gInventory with dark blue (unless the GUI has a BackgroundGraphic).
+will fill the background of the GUI gInventory with dark blue.
 
 *Compatibility:* Supported by **AGS 3.5.0** and later versions.
 
@@ -392,7 +392,7 @@ Gets/sets the background image of the GUI.
 
 You can set this to 0 to remove the background image from the GUI.
 
-When this property is assigned a sprite number other than 0 GUI.BackgroundColor and GUI.BorderColor are ignored.
+The background image is drawn on top of GUI.BackgroundColor and GUI.BorderColor, which are still drawn when a sprite is assigned. If you do not want them to be seen through the transparent parts of the image, set these colors to 0.
 
 Example:
 
@@ -417,7 +417,7 @@ Gets/sets the border color.
 
 Setting BorderColor to 0 will make GUI border fully transparent.
 
-Not applicable to TextWindow GUIs. This property is ignored if the GUI.BackgroundGraphic is assigned a sprite number (other than 0).
+Not applicable to TextWindow GUIs. The border is drawn even if the GUI.BackgroundGraphic is assigned a sprite number (other than 0): the sprite is drawn on top of it, so the border remains visible wherever the sprite does not cover it.
 
 Example:
 
@@ -425,7 +425,7 @@ Example:
 gInventory.BorderColor = Game.GetColorFromRGB(255, 255, 255);
 ```
 
-will draw the border of the GUI gInventory in white (unless the GUI has a BackgroundGraphic).
+will draw the border of the GUI gInventory in white.
 
 *Compatibility:* Supported by **AGS 3.5.0** and later versions.
 
