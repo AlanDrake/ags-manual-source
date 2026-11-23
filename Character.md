@@ -3237,7 +3237,7 @@ Example:
 lstItems.Clear();
 for (int i = 0; i < player.InventoryCount; i++)
 {
-  lstItems.AddItem(player.Inventory[i].Name);
+  lstItems.AddItem(player.Inventory[i].DisplayName);
 }
 ```
 
