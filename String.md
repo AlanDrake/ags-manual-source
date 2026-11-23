@@ -519,14 +519,13 @@ Returns a new string without any leading or trailing whitespace.
 Example:
 
 ```ags
-String name = txtName.Text.Trim();
-if (name == "")
+if (txtName.Text.Trim() == "")
 {
   lblError.Text = "Please type a name.";
 }
 ```
 
-will remove the spaces that the player may have typed around their name in the text box txtName, so that a name made only of spaces counts as empty.
+will ignore the spaces that the player may have typed around their name in the text box txtName, so that a name made only of spaces counts as empty.
 
 *Compatibility:* Supported by **AGS 4.0.0** and later versions.
 
