@@ -162,7 +162,7 @@ Example:
 WalkableArea* area = WalkableArea.GetAtRoomXY(player.x, player.y);
 if (area != null)
 {
-  AudioClip* step = AudioClip.GetByName(area.GetTextProperty("StepSound"));
+  AudioClip* step = AudioClip.GetByScriptName(area.GetTextProperty("StepSound"));
   if (step != null)
   {
     step.Play();
