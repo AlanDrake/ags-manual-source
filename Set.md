@@ -135,13 +135,11 @@ Removes an item from the Set. Returns false if there was no such item, otherwise
 Example:
 
 ```ags
-if (activeQuests.Remove("Find the key"))
-{
-  lblQuestLog.Text = "Quest completed: Find the key";
-}
+// the player has brought the key to the guard, so this quest is over
+activeQuests.Remove("Find the key");
 ```
 
-will remove the quest from the set of active quests, and report its completion only if the quest was active. Here `activeQuests` is a global Set*, created with Set.Create.
+will remove the quest from the set of active quests. Here `activeQuests` is a global Set* that holds the names of the quests the player is working on, created with Set.Create.
 
 *See also:* [`Add`](Set#setadd), [`Contains`](Set#setcontains)
 
