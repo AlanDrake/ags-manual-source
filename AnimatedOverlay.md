@@ -13,7 +13,7 @@ Animated Overlays have a setting that tells whether their animation pauses when 
 ### `AnimatedOverlay.CreateAnimated`
 
 ```ags
-static AnimagedOverlay* AnimatedOverlay.CreateAnimated(int x, int y, optional int slot, optional bool pauseWithGame)
+static AnimatedOverlay* AnimatedOverlay.CreateAnimated(int x, int y, optional int slot, optional bool pauseWithGame)
 ```
 
 Creates a AnimatedOverlay on the screen layer, optionally using a initial sprite, and optionally configured to pause its animation when the game is paused. By default animated overlay is initialized with sprite 0, and *pauses with the game*.
@@ -45,7 +45,7 @@ will cover the screen with a looping rain animation for as long as the player st
 ### `AnimatedOverlay.CreateRoomAnimated`
 
 ```ags
-static AnimagedOverlay* AnimatedOverlay.CreateRoomAnimated(int x, int y, optional int slot, optional bool pauseWithGame)
+static AnimatedOverlay* AnimatedOverlay.CreateRoomAnimated(int x, int y, optional int slot, optional bool pauseWithGame)
 ```
 
 Creates a AnimatedOverlay on the room layer, optionally using a initial sprite, and optionally configured to pause its animation when the game is paused. By default animated overlay is initialized with sprite 0, and *pauses with the game*.
@@ -113,7 +113,7 @@ will play a puff of smoke above the chimney once, and wait until it's over. Here
 ### `AnimatedOverlay.Animating`
 
 ```ags
-bool AnimatedOverlay.Animating
+readonly bool AnimatedOverlay.Animating
 ```
 
 Tells whether the overlay is currently animating.
@@ -145,7 +145,7 @@ will play an explosion without blocking, so that the player keeps control during
 ### `AnimatedOverlay.Frame`
 
 ```ags
-int AnimatedOverlay.Animating
+readonly int AnimatedOverlay.Frame
 ```
 
 Gets the current frame number during an animation.
@@ -164,7 +164,7 @@ will start an animation on the overlay `fireReflection` using the same view and 
 ### `AnimatedOverlay.Loop`
 
 ```ags
-int AnimatedOverlay.Loop
+readonly int AnimatedOverlay.Loop
 ```
 
 Gets the current loop number during an animation.
@@ -183,7 +183,7 @@ will start an animation on the overlay `fireReflection` using the same view and 
 ### `AnimatedOverlay.PauseWithGame`
 
 ```ags
-bool AnimatedOverlay.PauseWithGame
+readonly bool AnimatedOverlay.PauseWithGame
 ```
 
 Gets whether the overlay's animation is paused when the game is paused.
@@ -211,7 +211,7 @@ will write to the game log whether the given overlay's animation stops when the 
 ### `AnimatedOverlay.View`
 
 ```ags
-int AnimatedOverlay.View
+readonly int AnimatedOverlay.View
 ```
 
 Gets the current view number during an animation.
