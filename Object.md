@@ -1237,7 +1237,7 @@ will center the sprite vertically.
 ### `Object.GraphicOffsetX`
 
 ```ags
-float Object.GraphicOffsetX
+int Object.GraphicOffsetX
 ```
 
 Gets/sets the object's sprite relative offset on X axis, in pixels.
@@ -1245,7 +1245,7 @@ Gets/sets the object's sprite relative offset on X axis, in pixels.
 Example:
 
 ```ags
-oCrate.GraphicOffsetX = 3.0;
+oCrate.GraphicOffsetX = 3;
 ```
 
 will draw the object's sprite 3 pixels to the right of where it normally is.
@@ -1261,7 +1261,7 @@ will draw the object's sprite 3 pixels to the right of where it normally is.
 ### `Object.GraphicOffsetY`
 
 ```ags
-float Object.GraphicOffsetY
+int Object.GraphicOffsetY
 ```
 
 Gets/sets the object's sprite relative offset on Y axis, in pixels.
@@ -1269,7 +1269,7 @@ Gets/sets the object's sprite relative offset on Y axis, in pixels.
 Example:
 
 ```ags
-oCrate.GraphicOffsetY = -2.0;
+oCrate.GraphicOffsetY = -2;
 ```
 
 will draw the object's sprite 2 pixels higher than where it normally is.
@@ -1341,7 +1341,7 @@ will set the pivot to the topmost sprite's edge.
 ### `Object.GraphicPivotOffsetX`
 
 ```ags
-float Object.GraphicPivotOffsetX
+int Object.GraphicPivotOffsetX
 ```
 
 Gets/sets the object's sprite pivot relative offset on X axis, in pixels. This offset is combined with the [GraphicPivotX](Object#objectgraphicpivotx) property.
@@ -1349,7 +1349,7 @@ Gets/sets the object's sprite pivot relative offset on X axis, in pixels. This o
 Example:
 
 ```ags
-oCrate.GraphicPivotOffsetX = 5.0;
+oCrate.GraphicPivotOffsetX = 5;
 ```
 
 will move the object's sprite pivot point 5 pixels to the right, which affects where the sprite rotates around.
@@ -1366,7 +1366,7 @@ will move the object's sprite pivot point 5 pixels to the right, which affects w
 ### `Object.GraphicPivotOffsetY`
 
 ```ags
-float Object.GraphicPivotOffsetY
+int Object.GraphicPivotOffsetY
 ```
 
 Gets/sets the object's sprite pivot relative offset on Y axis, in pixels. This offset is combined with the [GraphicPivotY](Object#objectgraphicpivoty) property.
@@ -1374,7 +1374,7 @@ Gets/sets the object's sprite pivot relative offset on Y axis, in pixels. This o
 Example:
 
 ```ags
-oCrate.GraphicPivotOffsetY = -5.0;
+oCrate.GraphicPivotOffsetY = -5;
 ```
 
 will move the object's sprite pivot point 5 pixels up, which affects where the sprite rotates around.
