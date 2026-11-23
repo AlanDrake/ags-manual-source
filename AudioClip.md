@@ -310,7 +310,7 @@ will look through all the audio clips and play the first music track that has it
 ### `AudioClip.GetTextProperty`
 
 ```ags
-int AudioClip.GetTextProperty(const string property)
+String AudioClip.GetTextProperty(const string property)
 ```
 
 Gets a text custom property for this item.
@@ -382,7 +382,7 @@ will set the "Author" text property of the audio clip aMusic1 to "J. Smith".
 ### `AudioClip.DefaultPriority`
 
 ```ags
-readonly AudioPriority AudioClip.DefaultPriority
+readonly int AudioClip.DefaultPriority
 ```
 
 Gets the default priority of the audio clip.
