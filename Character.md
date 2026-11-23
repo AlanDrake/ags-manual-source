@@ -2770,7 +2770,7 @@ will center the sprite vertically.
 ### `Character.GraphicOffsetX`
 
 ```ags
-float Character.GraphicOffsetX
+int Character.GraphicOffsetX
 ```
 
 Gets/sets the character's sprite relative offset on X axis, in pixels.
@@ -2780,7 +2780,7 @@ Gets/sets the character's sprite relative offset on X axis, in pixels.
 Example:
 
 ```ags
-cEgo.GraphicOffsetX = 3.0;
+cEgo.GraphicOffsetX = 3;
 ```
 
 will draw the character's sprite 3 pixels to the right of where it normally is.
@@ -2802,7 +2802,7 @@ will draw the character's sprite 3 pixels to the right of where it normally is.
 ### `Character.GraphicOffsetY`
 
 ```ags
-float Character.GraphicOffsetY
+int Character.GraphicOffsetY
 ```
 
 Gets/sets the character's sprite relative offset on Y axis, in pixels.
@@ -2812,7 +2812,7 @@ Gets/sets the character's sprite relative offset on Y axis, in pixels.
 Example:
 
 ```ags
-cEgo.GraphicOffsetY = -2.0;
+cEgo.GraphicOffsetY = -2;
 ```
 
 will draw the character's sprite 2 pixels higher than where it normally is.
@@ -2890,7 +2890,7 @@ will set the pivot to the topmost sprite's edge.
 ### `Character.GraphicPivotOffsetX`
 
 ```ags
-float Character.GraphicPivotOffsetX
+int Character.GraphicPivotOffsetX
 ```
 
 Gets/sets the character's sprite pivot relative offset on X axis, in pixels. This offset is combined with the [GraphicPivotX](Character#charactergraphicpivotx) property.
@@ -2898,7 +2898,7 @@ Gets/sets the character's sprite pivot relative offset on X axis, in pixels. Thi
 Example:
 
 ```ags
-cEgo.GraphicPivotOffsetX = 5.0;
+cEgo.GraphicPivotOffsetX = 5;
 ```
 
 will move the character's sprite pivot point 5 pixels to the right, which affects where the sprite rotates and scales around.
@@ -2915,7 +2915,7 @@ will move the character's sprite pivot point 5 pixels to the right, which affect
 ### `Character.GraphicPivotOffsetY`
 
 ```ags
-float Character.GraphicPivotOffsetY
+int Character.GraphicPivotOffsetY
 ```
 
 Gets/sets the character's sprite pivot relative offset on Y axis, in pixels. This offset is combined with the [GraphicPivotY](Character#charactergraphicpivoty) property.
@@ -2923,7 +2923,7 @@ Gets/sets the character's sprite pivot relative offset on Y axis, in pixels. Thi
 Example:
 
 ```ags
-cEgo.GraphicPivotOffsetY = -5.0;
+cEgo.GraphicPivotOffsetY = -5;
 ```
 
 will move the character's sprite pivot point 5 pixels up, which affects where the sprite rotates and scales around.
