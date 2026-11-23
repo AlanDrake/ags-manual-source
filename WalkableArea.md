@@ -84,7 +84,7 @@ Animates a "door" object, retrieves "exit" area related to that door, and enable
 ### `WalkableArea.GetDrawingSurface`
 
 ```ags
-static DrawingSurface* GetDrawingSurface()
+static DrawingSurface* WalkableArea.GetDrawingSurface()
 ```
 
 Gets the drawing surface for the 8-bit walkable mask
