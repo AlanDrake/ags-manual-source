@@ -2965,7 +2965,7 @@ will rotate the player character sprite by 180 degrees.
 ### `Character.HasExplicitLight`
 
 ```ags
-readonly bool Character.HasExplicitTint
+readonly bool Character.HasExplicitLight
 ```
 
 Returns *true* if the character has a light set explicitly with the
@@ -4315,7 +4315,7 @@ whenever he walks.
 ### `Character.Turning`
 
 ```ags
-bool Character.Turning
+readonly bool Character.Turning
 ```
 
 Gets whether the character is currently turning on spot. This may be when it either is command to face to a different direction, or is changing direction while walking along a path.
@@ -4498,7 +4498,7 @@ will display the character's effective sprite anchor Y position, which is a valu
 ### `Character.ViewOffsetX`
 
 ```ags
-readonly float Character.ViewOffsetX
+readonly int Character.ViewOffsetX
 ```
 
 Gets the character's effective sprite relative offset on X axis, in pixels.
@@ -4508,7 +4508,7 @@ Normally the character's anchor is determined by [GraphicOffsetX](Character#char
 Example:
 
 ```ags
-Display("The sprite offset X is %.1f.", cEgo.ViewOffsetX);
+Display("The sprite offset X is %d.", cEgo.ViewOffsetX);
 ```
 
 will display the character's effective sprite offset on the X axis, in pixels.
@@ -4530,7 +4530,7 @@ will display the character's effective sprite offset on the X axis, in pixels.
 ### `Character.ViewOffsetY`
 
 ```ags
-readonly float Character.ViewOffsetY
+readonly int Character.ViewOffsetY
 ```
 
 Gets the character's effective sprite relative offset on Y axis, in pixels.
@@ -4540,7 +4540,7 @@ Normally the character's anchor is determined by [GraphicOffsetX](Character#char
 Example:
 
 ```ags
-Display("The sprite offset Y is %.1f.", cEgo.ViewOffsetY);
+Display("The sprite offset Y is %d.", cEgo.ViewOffsetY);
 ```
 
 will display the character's effective sprite offset on the Y axis, in pixels.
