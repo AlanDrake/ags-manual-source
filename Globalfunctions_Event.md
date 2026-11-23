@@ -12,32 +12,6 @@ Some functions will only work in the room script: `on_call`.
 
 ---
 
-### `dialog_request`
-
-```ags
-dialog_request (int parameter)
-```
-
-Called when a dialog script line "run-script" is processed. PARAMETER
-is the value of the number following the "run-script" on that line of
-the dialog script.
-
-Example:
-
-```ags
-function dialog_request(int parameter)
-{
-  if (parameter == 1)
-  {
-    player.AddInventory(iKey);
-  }
-}
-```
-
-will give the player the item iKey when a dialog script line "run-script 1" is processed.
-
----
-
 ### `game_start`
 
 ```ags
@@ -81,14 +55,11 @@ Example:
 ```ags
 function interface_click(int interface, int button)
 {
-  if (interface == gPanel.ID && button == btnQuit.ID)
-  {
-    QuitGame(1);
-  }
+  System.Log(eLogWarn, "Control %d of GUI %d has no event function", button, interface);
 }
 ```
 
-will ask the player to confirm quitting when the button 'btnQuit' on the GUI 'gPanel' is clicked.
+will write a warning to the engine log when the player clicks on a GUI control which has no event function of its own. This is the only case when interface_click is called, so normally you should script each control in its own event function instead (such as a button's OnClick), and may use interface_click to find the controls that you forgot to connect.
 
 ---
 
