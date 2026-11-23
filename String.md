@@ -295,7 +295,7 @@ if (player.InventoryCount > 0)
   String names[] = new String[player.InventoryCount];
   for (int i = 0; i < player.InventoryCount; i++)
   {
-    names[i] = player.Inventory[i].Name;
+    names[i] = player.Inventory[i].DisplayName;
   }
   player.Say("I have: %s.", String.Join(names, ", "));
 }
