@@ -365,7 +365,7 @@ will set the pivot to the topmost camera's edge.
 ### `Camera.PivotOffsetX`
 
 ```ags
-float Camera.PivotOffsetX
+int Camera.PivotOffsetX
 ```
 
 Gets/sets the camera's pivot relative offset on X axis, in pixels. This offset is combined with the [PivotX](Camera#camerapivotx) property.
@@ -373,7 +373,7 @@ Gets/sets the camera's pivot relative offset on X axis, in pixels. This offset i
 Example:
 
 ```ags
-Game.Camera.PivotOffsetX = 20.0;
+Game.Camera.PivotOffsetX = 20;
 Game.Camera.Rotation = 15.0;
 ```
 
@@ -391,7 +391,7 @@ will move the primary camera's pivot point 20 pixels to the right, and then rota
 ### `Camera.PivotOffsetY`
 
 ```ags
-float Camera.PivotOffsetY
+int Camera.PivotOffsetY
 ```
 
 Gets/sets the camera's pivot relative offset on Y axis, in pixels. This offset is combined with the [PivotY](Camera#camerapivoty) property.
@@ -399,7 +399,7 @@ Gets/sets the camera's pivot relative offset on Y axis, in pixels. This offset i
 Example:
 
 ```ags
-Game.Camera.PivotOffsetY = -20.0;
+Game.Camera.PivotOffsetY = -20;
 Game.Camera.Rotation = 15.0;
 ```
 
