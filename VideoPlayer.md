@@ -11,7 +11,7 @@ Returns a VideoPlayer instance from a video file
 Example:
 
 ```ags
-VideoPlayer* video = VideoPlayer.Open("$DATA$/intro.mp4");
+VideoPlayer* video = VideoPlayer.Open("$DATA$/intro.ogv");
 if (video != null)
 {
   Overlay* screen = Overlay.CreateGraphical(0, 0, video.Graphic);
@@ -48,7 +48,7 @@ VideoPlayer* tvVideo;
 
 function room_Load()
 {
-  tvVideo = VideoPlayer.Open("$DATA$/news.mp4", false, eRepeat);
+  tvVideo = VideoPlayer.Open("$DATA$/news.ogv", false, eRepeat);
   if (tvVideo != null)
   {
     oTV.Graphic = tvVideo.Graphic;
@@ -291,7 +291,7 @@ VideoPlayer* tvVideo;
 
 function room_Load()
 {
-  tvVideo = VideoPlayer.Open("$DATA$/news.mp4", true, eRepeat);
+  tvVideo = VideoPlayer.Open("$DATA$/news.ogv", true, eRepeat);
   if (tvVideo != null)
   {
     oTV.Graphic = tvVideo.Graphic;
