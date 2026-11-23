@@ -319,7 +319,7 @@ will print the message if the walk-behind area 1 is disabled, which is the case 
 
 *Compatibility:* Supported by **AGS 3.6.2** and later versions.
 
-*See also:* [`SetWalkBehindBase`(Globalfunctions_Room#setwalkbehindbase)], [`Object.Baseline`](Object#objectbaseline)
+*See also:* [`Walkbehind.Baseline`](Walkbehind#walkbehindbaseline), [`Object.Baseline`](Object#objectbaseline)
 
 ---
 
