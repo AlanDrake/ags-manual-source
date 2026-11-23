@@ -9,7 +9,7 @@ The RestoredSaveInfo instance is received as an argument by the [`validate_resto
 ### `RestoredSaveInfo.AudioClipTypeCount`
 
 ```ags
-int RestoredSaveInfo.AudioClipTypeCount;
+readonly int RestoredSaveInfo.AudioClipTypeCount;
 ```
 
 Gets the number of Audio Types present in this save.
@@ -58,7 +58,7 @@ will cancel the saves that contain extra data and accept all the others.
 ### `RestoredSaveInfo.CharacterCount`
 
 ```ags
-int RestoredSaveInfo.CharacterCount;
+readonly int RestoredSaveInfo.CharacterCount;
 ```
 
 Gets the number of Characters present in this save.
@@ -84,7 +84,7 @@ will accept the saves that lack at most the two characters added by an update of
 ### `RestoredSaveInfo.CursorCount`
 
 ```ags
-int RestoredSaveInfo.CursorCount;
+readonly int RestoredSaveInfo.CursorCount;
 ```
 
 Gets the number of Cursors present in this save.
@@ -108,7 +108,7 @@ will write a note to the game log if the save contains fewer cursors than the cu
 ### `RestoredSaveInfo.Description`
 
 ```ags
-String RestoredSaveInfo.Description;
+readonly String RestoredSaveInfo.Description;
 ```
 
 Gets this save's description string. This is the same string which was used in a call to [`SaveGameSlot`](Globalfunctions_General#savegameslot).
@@ -129,7 +129,7 @@ will write the description that the save was given when it was made to the game 
 ### `RestoredSaveInfo.DialogCount`
 
 ```ags
-int RestoredSaveInfo.DialogCount;
+readonly int RestoredSaveInfo.DialogCount;
 ```
 
 Gets the number of Dialogs present in this save.
@@ -153,7 +153,7 @@ will write a note to the game log if the save contains fewer dialogs than the cu
 ### `RestoredSaveInfo.EngineVersion`
 
 ```ags
-String RestoredSaveInfo.EngineVersion;
+readonly String RestoredSaveInfo.EngineVersion;
 ```
 
 Gets the version of the AGS engine which wrote this save, represented as a "N.N.N.N" string. This property is meant for informational purposes only.
@@ -174,7 +174,7 @@ will write the version of the AGS engine that wrote the save to the game log.
 ### `RestoredSaveInfo.GameVersion`
 
 ```ags
-String RestoredSaveInfo.GameVersion;
+readonly String RestoredSaveInfo.GameVersion;
 ```
 
 Gets the version of the game which wrote this save, represented as a "N.N.N.N" string. This value is taken from the respective property of the "Info" section of the General Settings.
@@ -200,7 +200,7 @@ will refuse the saves made by any version of the game starting with "0.", such a
 ### `RestoredSaveInfo.GlobalScriptDataSize`
 
 ```ags
-int RestoredSaveInfo.GlobalScriptDataSize;
+readonly int RestoredSaveInfo.GlobalScriptDataSize;
 ```
 
 Gets the size of the global script's data present in this save. This corresponds to the total number of bytes used by all the global script's variables.
@@ -221,7 +221,7 @@ will write the size of the global script's variables stored in the save to the g
 ### `RestoredSaveInfo.GUICount`
 
 ```ags
-int RestoredSaveInfo.GUICount;
+readonly int RestoredSaveInfo.GUICount;
 ```
 
 Gets the number of GUIs present in this save.
@@ -271,7 +271,7 @@ This will check how many gui controls were on GUI called gMainMenu when the save
 ### `RestoredSaveInfo.HasExtraData`
 
 ```ags
-bool RestoredSaveInfo.HasExtraData;
+readonly bool RestoredSaveInfo.HasExtraData;
 ```
 
 Gets whether this save has extra data, which means any data that is not applicable to the current game. This property is reserved for the future, and normally you should never get `validate_restored_save` called when there's extra data, as AGS cannot deal with such situation, and will error earlier.
@@ -295,7 +295,7 @@ will cancel the saves that contain data not applicable to the current game.
 ### `RestoredSaveInfo.HasMissingData`
 
 ```ags
-bool RestoredSaveInfo.HasMissingData;
+readonly bool RestoredSaveInfo.HasMissingData;
 ```
 
 Gets whether this save has any data missing, which means that it does not have something that the current game has: has less characters or less script variables, for example. In such case these items will be reset to their default states when the save is restored.
@@ -324,7 +324,7 @@ will accept the saves that lack some of the data the current game has (but not t
 ### `RestoredSaveInfo.InventoryItemCount`
 
 ```ags
-int RestoredSaveInfo.InventoryItemCount;
+readonly int RestoredSaveInfo.InventoryItemCount;
 ```
 
 Gets the number of Inventory Items present in this save.
@@ -381,7 +381,7 @@ function validate_restored_save(RestoredSaveInfo* info)
 ### `RestoredSaveInfo.Slot`
 
 ```ags
-int RestoredSaveInfo.Slot;
+readonly int RestoredSaveInfo.Slot;
 ```
 
 Gets this save's slot number.
@@ -433,7 +433,7 @@ will check if restored save has less GUI or View data, and requests to reload th
 ### `RestoredSaveInfo.Room`
 
 ```ags
-int RestoredSaveInfo.Room;
+readonly int RestoredSaveInfo.Room;
 ```
 
 Gets the room number this save was made in.
@@ -454,7 +454,7 @@ will write the number of the room in which the save was made to the game log.
 ### `RestoredSaveInfo.ScriptModuleCount`
 
 ```ags
-int RestoredSaveInfo.ScriptModuleCount;
+readonly int RestoredSaveInfo.ScriptModuleCount;
 ```
 
 Gets the number of script modules present in this save (not counting the global script, nor the room scripts).
@@ -475,7 +475,7 @@ will write the number of script modules stored in the save to the game log.
 ### `RestoredSaveInfo.ScriptModuleDataSizes`
 
 ```ags
-int RestoredSaveInfo.ScriptModuleDataSizes[int index];
+readonly int RestoredSaveInfo.ScriptModuleDataSizes[int index];
 ```
 
 Gets the size of each of the script module's data present in this save (except for the global script). This corresponds to the total number of bytes used by all the respective script's variables.
@@ -499,7 +499,7 @@ will write the size of the variables stored in the save for each script module t
 ### `RestoredSaveInfo.ScriptModuleNames`
 
 ```ags
-String RestoredSaveInfo.ScriptModuleNames[int index];
+readonly String RestoredSaveInfo.ScriptModuleNames[int index];
 ```
 
 Gets the name of each of the script modules in this save (except for the global script).
@@ -523,7 +523,7 @@ will write the names of all the script modules stored in the save to the game lo
 ### `RestoredSaveInfo.ViewCount`
 
 ```ags
-int RestoredSaveInfo.ViewCount;
+readonly int RestoredSaveInfo.ViewCount;
 ```
 
 Gets the number of Views present in this save.
@@ -547,7 +547,7 @@ will write a note to the game log if the save contains fewer views than the curr
 ### `RestoredSaveInfo.ViewFrameCount`
 
 ```ags
-int RestoredSaveInfo.ViewFrameCount[int view];
+readonly int RestoredSaveInfo.ViewFrameCount[int view];
 ```
 
 Gets the number of frames in each View present in this save.
@@ -571,7 +571,7 @@ will write to the game log how many frames the view VPLAYERWALK has in the save,
 ### `RestoredSaveInfo.ViewLoopCount`
 
 ```ags
-int RestoredSaveInfo.ViewLoopCount[int view];
+readonly int RestoredSaveInfo.ViewLoopCount[int view];
 ```
 
 Gets the number of loops in each View present in this save.
