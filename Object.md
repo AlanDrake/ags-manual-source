@@ -1417,7 +1417,7 @@ will rotate the object's sprite by 45 degrees clockwise.
 ### `Object.HasExplicitLight`
 
 ```ags
-readonly bool Object.HasExplicitTint
+readonly bool Object.HasExplicitLight
 ```
 
 Returns *true* if the object has a light set explicitly with the
