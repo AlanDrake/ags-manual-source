@@ -883,7 +883,7 @@ will apply the default instance of the shader to the control btnStart.
 ### `GUIControl.ShowBorder`
 
 ```ags
-int GUIControl.ShowBorder
+bool GUIControl.ShowBorder
 ```
 
 Gets/sets whether control should have a border drawn. The border color is defined by [`GUIControl.BorderColor`](GUIControl#guicontrolbordercolor) property. The border's thickness is defined by [`BorderWidth`](GUIControl#guicontrolborderwidth) property.
