@@ -544,7 +544,7 @@ will center the sprite vertically.
 ### `Overlay.GraphicOffsetX`
 
 ```ags
-float Overlay.GraphicOffsetX
+int Overlay.GraphicOffsetX
 ```
 
 Gets/sets the overlay's sprite relative offset on X axis, in pixels.
@@ -552,7 +552,7 @@ Gets/sets the overlay's sprite relative offset on X axis, in pixels.
 Example:
 
 ```ags
-myOverlay.GraphicOffsetX = 5.0;
+myOverlay.GraphicOffsetX = 5;
 ```
 
 will draw the sprite of the overlay myOverlay 5 pixels to the right of where it normally is.
@@ -568,7 +568,7 @@ will draw the sprite of the overlay myOverlay 5 pixels to the right of where it 
 ### `Overlay.GraphicOffsetY`
 
 ```ags
-float Overlay.GraphicOffsetY
+int Overlay.GraphicOffsetY
 ```
 
 Gets/sets the overlay's sprite relative offset on Y axis, in pixels.
@@ -576,7 +576,7 @@ Gets/sets the overlay's sprite relative offset on Y axis, in pixels.
 Example:
 
 ```ags
-myOverlay.GraphicOffsetY = -5.0;
+myOverlay.GraphicOffsetY = -5;
 ```
 
 will draw the sprite of the overlay myOverlay 5 pixels higher than where it normally is.
@@ -648,7 +648,7 @@ will set the pivot to the topmost sprite's edge.
 ### `Overlay.GraphicPivotOffsetX`
 
 ```ags
-float Overlay.GraphicPivotOffsetX
+int Overlay.GraphicPivotOffsetX
 ```
 
 Gets/sets the overlay's sprite pivot relative offset on X axis, in pixels. This offset is combined with the [GraphicPivotX](Overlay#overlaygraphicpivotx) property.
@@ -656,7 +656,7 @@ Gets/sets the overlay's sprite pivot relative offset on X axis, in pixels. This 
 Example:
 
 ```ags
-myOverlay.GraphicPivotOffsetX = 5.0;
+myOverlay.GraphicPivotOffsetX = 5;
 myOverlay.Rotation = 30.0;
 ```
 
@@ -674,7 +674,7 @@ will move the pivot point of the overlay myOverlay 5 pixels to the right, and th
 ### `Overlay.GraphicPivotOffsetY`
 
 ```ags
-float Overlay.GraphicPivotOffsetY
+int Overlay.GraphicPivotOffsetY
 ```
 
 Gets/sets the overlay's sprite pivot relative offset on Y axis, in pixels. This offset is combined with the [GraphicPivotY](Overlay#overlaygraphicpivoty) property.
@@ -682,7 +682,7 @@ Gets/sets the overlay's sprite pivot relative offset on Y axis, in pixels. This 
 Example:
 
 ```ags
-myOverlay.GraphicPivotOffsetY = -5.0;
+myOverlay.GraphicPivotOffsetY = -5;
 myOverlay.Rotation = 30.0;
 ```
 
