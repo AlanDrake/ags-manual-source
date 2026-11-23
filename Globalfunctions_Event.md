@@ -305,7 +305,7 @@ Example:
 ```ags
 function repeatedly_execute()
 {
-  lblLocation.Text = Game.GetLocationName(mouse.x, mouse.y);
+  lblLocation.Text = Game.GetDisplayNameAt(mouse.x, mouse.y);
 }
 ```
 
