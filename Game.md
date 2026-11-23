@@ -661,7 +661,7 @@ will pause / unpause the game when the player presses the space bar.
 ### `Game.PlayVoiceClip`
 
 ```ags
-static AudioChannel* Game.PlayVoiceClip(Character* c, int cue, bool as_speech)
+static AudioChannel* Game.PlayVoiceClip(Character* c, int cue, optional bool as_speech)
 ```
 
 Plays a voice clip from the **speech.vox** in a non-blocking manner. It returns an AudioChannel pointer which you may use to control playback same way you control other clips, or null if it could not be started.
