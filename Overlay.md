@@ -79,7 +79,7 @@ over.ZOrder = over.Y + over.Height;
 
 ```ags
 static Overlay* Overlay.CreateRoomTextual(int x, int y, int width,
-                                          FontType font, int color, string text)
+                                          FontType font, int color, string text, ...)
 ```
 
 Creates a *room overlay* containing the text you pass at the position specified. This overlay looks identical to the way speech text is
@@ -1132,7 +1132,7 @@ Then, removes the overlay and prints Valid again (which will now be 0).
 ### `Overlay.Visible`
 
 ```ags
-readonly bool Overlay.Visible;
+bool Overlay.Visible;
 ```
 
 Gets/sets whether the overlay is visible. This is *true* by default, but you can set it to *false* in order to temporarily hide the Overlay.
