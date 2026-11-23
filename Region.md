@@ -162,7 +162,7 @@ Example:
 ```ags
 function region2_WalksOnto(Region *theRegion)
 {
-  AudioClip* music = AudioClip.GetByName(theRegion.GetTextProperty("Music"));
+  AudioClip* music = AudioClip.GetByScriptName(theRegion.GetTextProperty("Music"));
   if (music != null)
   {
     music.Play();
