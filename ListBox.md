@@ -175,7 +175,7 @@ of save games set to the list box should be sorted. See their explanation in the
 Example:
 
 ```ags
-int slots[3];
+int slots[] = new int[3];
 slots[0] = 1;
 slots[1] = 2;
 slots[2] = 5;
