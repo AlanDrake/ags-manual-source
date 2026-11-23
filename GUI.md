@@ -615,7 +615,7 @@ will change the custom text property "HelpText" of the GUI gOptions, which the O
 ### `GUI.GUIToScreenPoint`
 
 ```ags
-Point \*GUI.GUIToScreenPoint(int guix, int guiy, bool clipToGUI = true)
+Point* GUI.GUIToScreenPoint(int guix, int guiy, bool clipToGUI = true)
 ```
 
 Returns the point on screen corresponding to the given GUI coordinates.
@@ -638,7 +638,7 @@ will place the GUI gTooltip on screen right below the button btnHelp. The button
 ### `GUI.ScreenToGUIPoint`
 
 ```ags
-Point \*GUI.ScreenToGUIPoint(int screenx, int screeny, bool clipToGUI = true)
+Point* GUI.ScreenToGUIPoint(int screenx, int screeny, bool clipToGUI = true)
 ```
 
 Returns the point on GUI corresponding to the given screen coordinates.
