@@ -279,7 +279,7 @@ will set the myString variable to "Some text" if it is null or empty
 ### `String.Join`
 
 ```ags
-static String.Join(String[], string separator)
+static String String.Join(String[], string separator)
 ```
 
 Joins a dynamic array of strings using the separator in a single string
