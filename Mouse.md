@@ -432,7 +432,7 @@ function on_mouse_click(MouseButton button, int mx, int my)
 }
 ```
 
-will let the player cycle through the cursor modes using the mouse wheel (this requires the "Enable mouse wheel support" option in the General Settings).
+will let the player cycle through the cursor modes using the mouse wheel.
 
 *See also:* [`Mouse.Mode`](Mouse#mousemode)
 
