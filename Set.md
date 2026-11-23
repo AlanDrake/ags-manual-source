@@ -148,7 +148,7 @@ will remove the quest from the set of active quests. Here `activeQuests` is a gl
 ### `Set.CompareStyle`
 
 ```ags
-StringCompareStyle Set.CompareStyle
+readonly StringCompareStyle Set.CompareStyle
 ```
 
 Returns the string comparison method for this Set.
@@ -175,7 +175,7 @@ will add a name to any set, converting it to lowercase first if the set would ot
 ### `Set.ItemCount`
 
 ```ags
-int Set.ItemCount
+readonly int Set.ItemCount
 ```
 
 Returns the number of items currently in the Set.
@@ -193,7 +193,7 @@ will show how many clues the player has found. Because a set never contains the 
 ### `Set.SortStyle`
 
 ```ags
-SortStyle Set.SortStyle
+readonly SortStyle Set.SortStyle
 ```
 
 Returns the sorting method for this Set.
